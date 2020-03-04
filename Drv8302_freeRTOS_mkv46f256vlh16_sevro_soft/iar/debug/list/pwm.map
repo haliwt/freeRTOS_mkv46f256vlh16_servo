@@ -1,0 +1,1017 @@
+###############################################################################
+#
+# IAR ELF Linker V8.32.1.169/W32 for ARM                  04/Mar/2020  17:51:44
+# Copyright 2007-2018 IAR Systems AB.
+#
+#    Output file  =  
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\pwm.out
+#    Map file     =  
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\list\pwm.map
+#    Command line =  
+#        -f C:\Users\ADMINI~1\AppData\Local\Temp\EW6978.tmp
+#        (D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\adc.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\bldc.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\board.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\clock_config.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\event_groups.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_aoi.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_assert.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_cadc.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_clock.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_cmp.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_common.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_crc.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_dac.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_debug_console.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_dmamux.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_dspi.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_dspi_edma.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_edma.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_enc.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_ewm.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_flexcan.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_flexcan_edma.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_ftfx_cache.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_ftfx_controller.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_ftfx_flash.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_ftfx_flexnvm.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_gpio.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_i2c.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_i2c_edma.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_llwu.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_lptmr.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_pdb.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_pit.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_pmc.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_pwm.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_rcm.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_sim.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_smc.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_str.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_uart.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_uart_edma.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_wdog.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_xbara.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\fsl_xbarb.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\heap_4.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\input.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\key.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\led.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\list.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\lptmr_adapter.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\main.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\output.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\pin_mux.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\pollingusart.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\port.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\portasm.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\queue.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\serial_manager.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\serial_port_uart.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\startup_MKV46F16.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\stream_buffer.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\system_MKV46F16.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\tasks.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\timers.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\uart_adapter.o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj\usart_edma_rb.o
+#        --redirect _Printf=_PrintfSmallNoMb --redirect _Scanf=_ScanfSmallNoMb
+#        --no_out_extension -o
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\pwm.out
+#        --map
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\list\pwm.map
+#        --config
+#        D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar/MKV46F256xxx16_flash.icf
+#        --semihosting --entry __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__Heap_Handler  = DLMalloc
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The advanced heap was selected because the application calls memory
+allocation functions outside of system library functions, and there
+are calls to deallocation functions in the application.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at 0x0 { ro section .intvec };
+"P1":  place in [from 0x400 to 0x40f] { section FlashConfig };
+"P2":  place in [from 0x0 to 0x3ff] |
+                [from 0x410 to 0x1'ffff] { ro };
+define block RW { rw };
+"P3":  place in [from 0x1fff'e000 to 0x1fff'ffff] |
+                [from 0x2000'0000 to 0x2000'3bff] { block RW };
+define block ZI { zi };
+"P4":  place in [from 0x1fff'e000 to 0x1fff'ffff] |
+                [from 0x2000'0000 to 0x2000'3bff] { block ZI };
+define block CSTACK with size = 1K, alignment = 8 { };
+"P6":  place in [from 0x2000'3c00 to 0x2000'3fff] { block CSTACK };
+initialize by copy { rw, section .textrw };
+
+  Section            Kind         Address    Size  Object
+  -------            ----         -------    ----  ------
+"A0":                                       0x400
+  .intvec            ro code          0x0   0x400  startup_MKV46F16.o [1]
+                                  - 0x400   0x400
+
+"P1":                                        0x10
+  FlashConfig        ro code        0x400    0x10  startup_MKV46F16.o [1]
+                                  - 0x410    0x10
+
+"P2":                                      0x7570
+  .text              ro code        0x410   0xb68  tasks.o [1]
+  .text              ro code        0xf78   0x274  heap_4.o [1]
+  .text              ro code       0x11ec    0x66  ABImemset.o [4]
+  .text              ro code       0x1252    0x9a  list.o [1]
+  .text              ro code       0x12ec   0x25c  port.o [1]
+  .text              ro code       0x1548   0x4a0  timers.o [1]
+  CODE               ro code       0x19e8    0xb0  portasm.o [1]
+  .text              ro code       0x1a98   0x704  queue.o [1]
+  .text              ro code       0x219c    0xa6  ABImemcpy.o [4]
+  .text              ro code       0x2242    0x3a  zero_init3.o [4]
+  .text              ro code       0x227c   0x9a0  fsl_pwm.o [1]
+  .text              ro code       0x2c1c    0x1c  fsl_assert.o [1]
+  .text              ro code       0x2c38   0x20a  fsl_debug_console.o [1]
+  .rodata            const         0x2e42     0x2  bldc.o [1]
+  .text              ro code       0x2e44   0x1fc  serial_manager.o [1]
+  .text              ro code       0x3040     0x6  ABImemclr4.o [4]
+  .text              ro code       0x3046   0x310  fsl_str.o [1]
+  .rodata            const         0x3356     0x2  key.o [1]
+  .text              ro code       0x3358    0xd4  serial_port_uart.o [1]
+  .text              ro code       0x342c    0x32  ABImemset48.o [4]
+  .rodata            const         0x345e     0x2  output.o [1]
+  .text              ro code       0x3460    0x36  strlen.o [4]
+  .text              ro code       0x3496     0x2  startup_MKV46F16.o [1]
+  .text              ro code       0x3498   0x178  uart_adapter.o [1]
+  .text              ro code       0x3610   0x388  fsl_uart.o [1]
+  .text              ro code       0x3998   0x6a4  bldc.o [1]
+  .text              ro code       0x403c   0x38c  fsl_gpio.o [1]
+  .text              ro code       0x43c8    0xb0  fsl_xbara.o [1]
+  .text              ro code       0x4478   0x640  fsl_clock.o [1]
+  .text              ro code       0x4ab8   0x654  fsl_cadc.o [1]
+  .text              ro code       0x510c   0x538  main.o [1]
+  .text              ro code       0x5644    0xb8  pin_mux.o [1]
+  .text              ro code       0x56fc   0x106  clock_config.o [1]
+  .text              ro code       0x5802    0x18  board.o [1]
+  .text              ro code       0x581a    0x18  led.o [1]
+  .text              ro code       0x5832     0x2  startup_MKV46F16.o [1]
+  .text              ro code       0x5834   0x3c0  key.o [1]
+  .text              ro code       0x5bf4   0x144  output.o [1]
+  .text              ro code       0x5d38    0xf4  adc.o [1]
+  .text              ro code       0x5e2c    0x34  pollingusart.o [1]
+  .text              ro code       0x5e60    0x28  printf.o [2]
+  .text              ro code       0x5e88   0x4d0  xprintfsmall_nomb.o [2]
+  .text              ro code       0x6358    0x16  strchr.o [4]
+  .text              ro code       0x636e     0x2  startup_MKV46F16.o [1]
+  .text              ro code       0x6370    0x40  xfail_s.o [2]
+  .text              ro code       0x63b0    0x58  memchr.o [4]
+  .text              ro code       0x6408     0x6  abort.o [2]
+  .text              ro code       0x640e     0x2  startup_MKV46F16.o [1]
+  .text              ro code       0x6410    0x14  exit.o [5]
+  .text              ro code       0x6424   0x214  fsl_edma.o [1]
+  .rodata            const         0x6638    0x9c  fsl_debug_console.o [1]
+  .rodata            const         0x66d4    0x9c  serial_manager.o [1]
+  .rodata            const         0x6770    0x9c  serial_port_uart.o [1]
+  .rodata            const         0x680c    0x90  uart_adapter.o [1]
+  .rodata            const         0x689c    0x88  fsl_cadc.o [1]
+  .rodata            const         0x6924    0x88  fsl_clock.o [1]
+  .rodata            const         0x69ac    0x88  fsl_dspi.o [1]
+  .rodata            const         0x6a34    0x88  fsl_edma.o [1]
+  .rodata            const         0x6abc    0x88  fsl_flexcan.o [1]
+  .rodata            const         0x6b44    0x88  fsl_gpio.o [1]
+  .rodata            const         0x6bcc    0x88  fsl_uart.o [1]
+  .rodata            const         0x6c54    0x88  fsl_uart.o [1]
+  .rodata            const         0x6cdc    0x88  fsl_uart.o [1]
+  .rodata            const         0x6d64    0x88  fsl_xbara.o [1]
+  .rodata            const         0x6dec    0x84  fsl_pwm.o [1]
+  .text              ro code       0x6e70    0x7c  fsl_dspi.o [1]
+  .text              ro code       0x6eec    0x74  fsl_flexcan.o [1]
+  .text              ro code       0x6f60    0x58  fsl_i2c.o [1]
+  .text              ro code       0x6fb8    0x50  lptmr_adapter.o [1]
+  .rodata            const         0x7008    0x48  uart_adapter.o [1]
+  .rodata            const         0x7050    0x40  fsl_xbara.o [1]
+  .rodata            const         0x7090    0x3c  fsl_cadc.o [1]
+  .rodata            const         0x70cc    0x3c  fsl_gpio.o [1]
+  .rodata            const         0x7108    0x3c  fsl_pwm.o [1]
+  .text              ro code       0x7144    0x36  system_MKV46F16.o [1]
+  .text              ro code       0x717a     0x2  startup_MKV46F16.o [1]
+  .rodata            const         0x717c    0x30  adc.o [1]
+  .rodata            const         0x71ac    0x2c  fsl_assert.o [1]
+  .text              ro code       0x71d8    0x2c  copy_init3.o [4]
+  .rodata            const         0x7204    0x28  adc.o [1]
+  .rodata            const         0x722c    0x28  fsl_debug_console.o [1]
+  .text              ro code       0x7254    0x28  startup_MKV46F16.o [1]
+  .text              ro code       0x727c    0x28  data_init.o [4]
+  .rodata            const         0x72a4    0x24  uart_adapter.o [1]
+  .text              ro code       0x72c8    0x22  fpinit_M.o [3]
+  .iar.init_table    const         0x72ec    0x24  - Linker created -
+  .text              ro code       0x7310    0x20  putchar.o [2]
+  .text              ro code       0x7330     0x2  startup_MKV46F16.o [1]
+  .text              ro code       0x7334    0x1e  cmain.o [4]
+  .text              ro code       0x7352     0x4  low_level_init.o [2]
+  .text              ro code       0x7356     0x4  exit.o [2]
+  .text              ro code       0x735c     0xa  cexit.o [4]
+  .rodata            const         0x7368    0x1c  bldc.o [1]
+  .rodata            const         0x7384    0x1c  fsl_uart.o [1]
+  .rodata            const         0x73a0    0x1c  main.o [1]
+  .rodata            const         0x73bc    0x1c  main.o [1]
+  .rodata            const         0x73d8    0x1c  main.o [1]
+  .rodata            const         0x73f4    0x1c  main.o [1]
+  .rodata            const         0x7410    0x1c  main.o [1]
+  .rodata            const         0x742c    0x1c  main.o [1]
+  .rodata            const         0x7448    0x18  fsl_dspi.o [1]
+  .rodata            const         0x7460    0x18  fsl_flexcan.o [1]
+  .rodata            const         0x7478    0x18  fsl_flexcan.o [1]
+  .rodata            const         0x7490    0x18  fsl_pwm.o [1]
+  .rodata            const         0x74a8    0x18  fsl_uart.o [1]
+  .rodata            const         0x74c0    0x18  main.o [1]
+  .rodata            const         0x74d8    0x18  main.o [1]
+  .text              ro code       0x74f0    0x16  xprout.o [2]
+  .rodata            const         0x7508    0x14  bldc.o [1]
+  .rodata            const         0x751c    0x14  fsl_cadc.o [1]
+  .rodata            const         0x7530    0x14  fsl_clock.o [1]
+  .rodata            const         0x7544    0x14  fsl_gpio.o [1]
+  .rodata            const         0x7558    0x14  fsl_gpio.o [1]
+  .rodata            const         0x756c    0x14  fsl_gpio.o [1]
+  .rodata            const         0x7580    0x14  fsl_gpio.o [1]
+  .rodata            const         0x7594    0x14  fsl_gpio.o [1]
+  .rodata            const         0x75a8    0x14  main.o [1]
+  .rodata            const         0x75bc    0x14  main.o [1]
+  .rodata            const         0x75d0    0x14  main.o [1]
+  .rodata            const         0x75e4    0x14  main.o [1]
+  .rodata            const         0x75f8    0x14  main.o [1]
+  Initializer bytes  const         0x760c    0x14  <for RW-1>
+  .rodata            const         0x7620    0x10  fsl_cadc.o [1]
+  .rodata            const         0x7630    0x10  fsl_clock.o [1]
+  .rodata            const         0x7640    0x10  fsl_debug_console.o [1]
+  .rodata            const         0x7650    0x10  fsl_pwm.o [1]
+  .rodata            const         0x7660    0x10  fsl_pwm.o [1]
+  .rodata            const         0x7670    0x10  main.o [1]
+  .rodata            const         0x7680    0x10  main.o [1]
+  .rodata            const         0x7690    0x10  serial_manager.o [1]
+  .rodata            const         0x76a0    0x10  serial_port_uart.o [1]
+  .rodata            const         0x76b0    0x10  serial_port_uart.o [1]
+  .rodata            const         0x76c0     0xc  clock_config.o [1]
+  .rodata            const         0x76cc     0xc  fsl_cadc.o [1]
+  .rodata            const         0x76d8     0xc  fsl_clock.o [1]
+  .rodata            const         0x76e4     0xc  fsl_clock.o [1]
+  .rodata            const         0x76f0     0xc  fsl_debug_console.o [1]
+  .rodata            const         0x76fc     0xc  fsl_edma.o [1]
+  .rodata            const         0x7708     0xc  fsl_gpio.o [1]
+  .rodata            const         0x7714     0xc  fsl_pwm.o [1]
+  .rodata            const         0x7720     0xc  fsl_pwm.o [1]
+  .rodata            const         0x772c     0xc  fsl_pwm.o [1]
+  .rodata            const         0x7738     0xc  fsl_pwm.o [1]
+  .rodata            const         0x7744     0xc  main.o [1]
+  .rodata            const         0x7750     0xc  main.o [1]
+  .rodata            const         0x775c     0xc  main.o [1]
+  .rodata            const         0x7768     0xc  serial_manager.o [1]
+  .rodata            const         0x7774     0xc  serial_manager.o [1]
+  .text              ro code       0x7780     0xc  cstartup_M.o [4]
+  .rodata            const         0x778c     0x8  clock_config.o [1]
+  .rodata            const         0x7794     0x8  clock_config.o [1]
+  .rodata            const         0x779c     0x8  fsl_clock.o [1]
+  .rodata            const         0x77a4     0x8  fsl_debug_console.o [1]
+  .rodata            const         0x77ac     0x8  fsl_pwm.o [1]
+  .rodata            const         0x77b4     0x8  fsl_uart.o [1]
+  .rodata            const         0x77bc     0x8  fsl_uart.o [1]
+  .rodata            const         0x77c4     0x8  fsl_uart.o [1]
+  .rodata            const         0x77cc     0x8  fsl_uart.o [1]
+  .rodata            const         0x77d4     0x8  serial_manager.o [1]
+  .rodata            const         0x77dc     0x8  serial_manager.o [1]
+  .rodata            const         0x77e4     0x8  serial_manager.o [1]
+  .rodata            const         0x77ec     0x8  serial_manager.o [1]
+  .rodata            const         0x77f4     0x8  serial_port_uart.o [1]
+  .rodata            const         0x77fc     0x8  serial_port_uart.o [1]
+  .rodata            const         0x7804     0x8  tasks.o [1]
+  .rodata            const         0x780c     0x8  timers.o [1]
+  .rodata            const         0x7814     0x8  timers.o [1]
+  .rodata            const         0x781c     0x8  uart_adapter.o [1]
+  .rodata            const         0x7824     0x8  uart_adapter.o [1]
+  .rodata            const         0x782c     0x8  uart_adapter.o [1]
+  .rodata            const         0x7834     0x8  uart_adapter.o [1]
+  .rodata            const         0x783c     0x8  uart_adapter.o [1]
+  .text              ro code       0x7844     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x784c     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x7854     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x785c     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x7864     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x786c     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x7874     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x787c     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x7884     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x788c     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x7894     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x789c     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78a4     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78ac     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78b4     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78bc     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78c4     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78cc     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78d4     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78dc     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78e4     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78ec     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78f4     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x78fc     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x7904     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x790c     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x7914     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x791c     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x7924     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x792c     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x7934     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x793c     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x7944     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x794c     0x8  startup_MKV46F16.o [1]
+  .text              ro code       0x7954     0x8  startup_MKV46F16.o [1]
+  .rodata            const         0x795c     0x4  fsl_cadc.o [1]
+  .rodata            const         0x7960     0x4  fsl_cadc.o [1]
+  .rodata            const         0x7964     0x4  fsl_pwm.o [1]
+  .rodata            const         0x7968     0x4  fsl_xbara.o [1]
+  .rodata            const         0x796c     0x4  fsl_xbara.o [1]
+  .rodata            const         0x7970     0x4  heap_4.o [1]
+  .rodata            const         0x7974     0x4  lptmr_adapter.o [1]
+  .rodata            const         0x7978     0x4  port.o [1]
+  .text              ro code       0x797c     0x4  startup_MKV46F16.o [1]
+  .rodata            const         0x7980     0x0  zero_init3.o [4]
+  .rodata            const         0x7980     0x0  copy_init3.o [4]
+                                 - 0x7980  0x7570
+
+"P3-P4", part 1 of 2:                        0x14
+  RW                          0x2000'0000    0x14  <Block>
+    RW-1                      0x2000'0000    0x13  <Init block>
+      .data          inited   0x2000'0000     0x4  fsl_clock.o [1]
+      .data          inited   0x2000'0004     0x4  fsl_clock.o [1]
+      .data          inited   0x2000'0008     0x4  port.o [1]
+      .data          inited   0x2000'000c     0x4  system_MKV46F16.o [1]
+      .data          inited   0x2000'0010     0x2  bldc.o [1]
+      .data          inited   0x2000'0012     0x1  key.o [1]
+                            - 0x2000'0014    0x14
+
+"P3-P4", part 2 of 2:                      0x2a60
+  ZI                          0x2000'0014  0x2a60  <Block>
+    .bss             zero     0x2000'0014     0x4  bldc.o [1]
+    .bss             zero     0x2000'0018     0x4  bldc.o [1]
+    .bss             zero     0x2000'001c     0x4  fsl_clock.o [1]
+    .bss             zero     0x2000'0020    0x1c  fsl_debug_console.o [1]
+    .bss             zero     0x2000'003c     0x4  fsl_debug_console.o [1]
+    .bss             zero     0x2000'0040     0x4  fsl_dspi.o [1]
+    .bss             zero     0x2000'0044     0x4  fsl_dspi.o [1]
+    .bss             zero     0x2000'0048     0x4  fsl_dspi.o [1]
+    .bss             zero     0x2000'004c    0x40  fsl_edma.o [1]
+    .bss             zero     0x2000'008c     0x8  fsl_flexcan.o [1]
+    .bss             zero     0x2000'0094     0x4  fsl_flexcan.o [1]
+    .bss             zero     0x2000'0098     0x4  fsl_i2c.o [1]
+    .bss             zero     0x2000'009c     0x4  fsl_i2c.o [1]
+    .bss             zero     0x2000'00a0     0x4  fsl_i2c.o [1]
+    .bss             zero     0x2000'00a4     0x8  fsl_uart.o [1]
+    .bss             zero     0x2000'00ac     0x4  fsl_uart.o [1]
+    .bss             zero     0x2000'00b0  0x2800  heap_4.o [1]
+    .bss             zero     0x2000'28b0     0x8  heap_4.o [1]
+    .bss             zero     0x2000'28b8     0x4  heap_4.o [1]
+    .bss             zero     0x2000'28bc     0x4  heap_4.o [1]
+    .bss             zero     0x2000'28c0     0x4  heap_4.o [1]
+    .bss             zero     0x2000'28c4     0x4  heap_4.o [1]
+    .bss             zero     0x2000'28c8     0x4  lptmr_adapter.o [1]
+    .bss             zero     0x2000'28cc     0x4  main.o [1]
+    .bss             zero     0x2000'28d0     0x4  main.o [1]
+    .bss             zero     0x2000'28d4     0x4  main.o [1]
+    .bss             zero     0x2000'28d8     0x4  main.o [1]
+    .bss             zero     0x2000'28dc     0xc  main.o [1]
+    .bss             zero     0x2000'28e8     0x4  port.o [1]
+    .bss             zero     0x2000'28ec    0x40  queue.o [1]
+    .bss             zero     0x2000'292c     0x4  tasks.o [1]
+    .bss             zero     0x2000'2930    0x64  tasks.o [1]
+    .bss             zero     0x2000'2994    0x14  tasks.o [1]
+    .bss             zero     0x2000'29a8    0x14  tasks.o [1]
+    .bss             zero     0x2000'29bc     0x4  tasks.o [1]
+    .bss             zero     0x2000'29c0     0x4  tasks.o [1]
+    .bss             zero     0x2000'29c4    0x14  tasks.o [1]
+    .bss             zero     0x2000'29d8    0x14  tasks.o [1]
+    .bss             zero     0x2000'29ec     0x4  tasks.o [1]
+    .bss             zero     0x2000'29f0    0x14  tasks.o [1]
+    .bss             zero     0x2000'2a04     0x4  tasks.o [1]
+    .bss             zero     0x2000'2a08     0x4  tasks.o [1]
+    .bss             zero     0x2000'2a0c     0x4  tasks.o [1]
+    .bss             zero     0x2000'2a10     0x4  tasks.o [1]
+    .bss             zero     0x2000'2a14     0x4  tasks.o [1]
+    .bss             zero     0x2000'2a18     0x4  tasks.o [1]
+    .bss             zero     0x2000'2a1c     0x4  tasks.o [1]
+    .bss             zero     0x2000'2a20     0x4  tasks.o [1]
+    .bss             zero     0x2000'2a24     0x4  tasks.o [1]
+    .bss             zero     0x2000'2a28     0x4  tasks.o [1]
+    .bss             zero     0x2000'2a2c     0x4  tasks.o [1]
+    .bss             zero     0x2000'2a30    0x14  timers.o [1]
+    .bss             zero     0x2000'2a44    0x14  timers.o [1]
+    .bss             zero     0x2000'2a58     0x4  timers.o [1]
+    .bss             zero     0x2000'2a5c     0x4  timers.o [1]
+    .bss             zero     0x2000'2a60     0x4  timers.o [1]
+    .bss             zero     0x2000'2a64     0x4  timers.o [1]
+    .bss             zero     0x2000'2a68     0x4  timers.o [1]
+    .bss             zero     0x2000'2a6c     0x4  xfail_s.o [2]
+    .bss             zero     0x2000'2a70     0x2  main.o [1]
+    .bss             zero     0x2000'2a72     0x1  bldc.o [1]
+    .bss             zero     0x2000'2a73     0x1  port.o [1]
+                            - 0x2000'2a74  0x2a60
+
+"P6":                                       0x400
+  CSTACK                      0x2000'3c00   0x400  <Block>
+    CSTACK           uninit   0x2000'3c00   0x400  <Block tail>
+                            - 0x2000'4000   0x400
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+       0x7980     0x1'ffff  0x1'8680
+  0x1fff'e000  0x1fff'ffff    0x2000
+  0x2000'2a74  0x2000'3bff    0x118c
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x2a60:
+          0x2000'0014  0x2a60
+
+Copy (__iar_copy_init3)
+    1 source range, total size 0x14 (105% of destination):
+               0x760c    0x14
+    1 destination range, total size 0x13:
+          0x2000'0000    0x13
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module               ro code  ro data  rw data
+    ------               -------  -------  -------
+command line/config:
+    ----------------------------------------------
+    Total:
+
+D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj: [1]
+    adc.o                    244       88
+    bldc.o                 1 700       52       11
+    board.o                   24
+    clock_config.o           262       28
+    fsl_assert.o              28       44
+    fsl_cadc.o             1 620      252
+    fsl_clock.o            1 600      212       12
+    fsl_debug_console.o      522      232       32
+    fsl_dspi.o               124      160       12
+    fsl_edma.o               532      148       64
+    fsl_flexcan.o            116      184       12
+    fsl_gpio.o               908      308
+    fsl_i2c.o                 88                12
+    fsl_pwm.o              2 464      308
+    fsl_str.o                784
+    fsl_uart.o               904      492       12
+    fsl_xbara.o              176      208
+    heap_4.o                 628        4   10 264
+    key.o                    960        3        1
+    led.o                     24
+    list.o                   154
+    lptmr_adapter.o           80        4        4
+    main.o                 1 336      384       30
+    output.o                 324        2
+    pin_mux.o                184
+    pollingusart.o            52
+    port.o                   604        8        9
+    portasm.o                176
+    queue.o                1 796                64
+    serial_manager.o         508      228
+    serial_port_uart.o       212      204
+    startup_MKV46F16.o     1 376
+    system_MKV46F16.o         54        4        4
+    tasks.o                2 920        8      260
+    timers.o               1 184       16       60
+    uart_adapter.o           376      292
+    ----------------------------------------------
+    Total:                25 044    3 873   10 863
+
+dl7M_tln.a: [2]
+    abort.o                    6
+    exit.o                     4
+    low_level_init.o           4
+    printf.o                  40
+    putchar.o                 32
+    xfail_s.o                 64                 4
+    xprintfsmall_nomb.o    1 232
+    xprout.o                  22
+    ----------------------------------------------
+    Total:                 1 404                 4
+
+m7M_tls.a: [3]
+    fpinit_M.o                34
+    ----------------------------------------------
+    Total:                    34
+
+rt7M_tl.a: [4]
+    ABImemclr4.o               6
+    ABImemcpy.o              166
+    ABImemset.o              102
+    ABImemset48.o             50
+    cexit.o                   10
+    cmain.o                   30
+    copy_init3.o              44
+    cstartup_M.o              12
+    data_init.o               40
+    memchr.o                  88
+    strchr.o                  22
+    strlen.o                  54
+    zero_init3.o              58
+    ----------------------------------------------
+    Total:                   682
+
+shb_l.a: [5]
+    exit.o                    20
+    ----------------------------------------------
+    Total:                    20
+
+    Gaps                       4        6
+    Linker created                     37    1 024
+--------------------------------------------------
+    Grand Total:          27 188    3 916   11 891
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address    Size  Type      Object
+-----                       -------    ----  ----      ------
+.iar.init_table$$Base        0x72ec           --   Gb  - Linker created -
+.iar.init_table$$Limit       0x7310           --   Gb  - Linker created -
+?main                        0x7335          Code  Gb  cmain.o [4]
+ABC_POWER_OUTPUT_Init        0x5ceb    0x14  Code  Gb  output.o [1]
+ADC_CADC_Init                0x5d51    0xd0  Code  Gb  adc.o [1]
+AppTaskCreate                0x554b    0x46  Code  Lc  main.o [1]
+BOARD_BootClockRUN           0x571f    0x3e  Code  Gb  clock_config.o [1]
+BOARD_InitDebugConsole       0x5803    0x18  Code  Gb  board.o [1]
+BOARD_InitPins               0x5675    0x6e  Code  Gb  pin_mux.o [1]
+CADC_EnableConverter         0x4d67    0x4e  Code  Gb  fsl_cadc.o [1]
+CADC_EnableConverterPower
+                             0x4db5    0x5e  Code  Gb  fsl_cadc.o [1]
+CADC_EnableSample            0x5d39    0x18  Code  Lc  adc.o [1]
+CADC_GetDefaultConfig        0x4bad    0x40  Code  Gb  fsl_cadc.o [1]
+CADC_GetDefaultConverterConfig
+                             0x4d25    0x42  Code  Gb  fsl_cadc.o [1]
+CADC_GetInstance             0x4acd    0x34  Code  Lc  fsl_cadc.o [1]
+CADC_GetStatusFlags          0x4e13    0x66  Code  Gb  fsl_cadc.o [1]
+CADC_Init                    0x4b01    0xac  Code  Gb  fsl_cadc.o [1]
+CADC_SetConverterAConfig
+                             0x4bed    0x7e  Code  Lc  fsl_cadc.o [1]
+CADC_SetConverterBConfig
+                             0x4c6b    0x78  Code  Lc  fsl_cadc.o [1]
+CADC_SetConverterConfig
+                             0x4ce3    0x42  Code  Gb  fsl_cadc.o [1]
+CADC_SetSampleConfig         0x4e79   0x270  Code  Gb  fsl_cadc.o [1]
+CAN0_DriverIRQHandler        0x6eed    0x2a  Code  Gb  fsl_flexcan.o [1]
+CAN1_DriverIRQHandler        0x6f19    0x2a  Code  Gb  fsl_flexcan.o [1]
+CLOCK_BootToPeeMode          0x4a45    0x4a  Code  Gb  fsl_clock.o [1]
+CLOCK_CONFIG_SetFllExtRefDiv
+                             0x570b    0x14  Code  Lc  clock_config.o [1]
+CLOCK_CONFIG_SetSimSafeDivs
+                             0x5703     0x8  Code  Lc  clock_config.o [1]
+CLOCK_EnableClock            0x3999    0x14  Code  Lc  bldc.o [1]
+CLOCK_EnableClock            0x4ab9    0x14  Code  Lc  fsl_cadc.o [1]
+CLOCK_EnableClock            0x227d    0x14  Code  Lc  fsl_pwm.o [1]
+CLOCK_EnableClock            0x3611    0x14  Code  Lc  fsl_uart.o [1]
+CLOCK_EnableClock            0x43c9    0x12  Code  Lc  fsl_xbara.o [1]
+CLOCK_EnableClock            0x5855    0x14  Code  Lc  key.o [1]
+CLOCK_EnableClock            0x5bf5    0x12  Code  Lc  output.o [1]
+CLOCK_EnableClock            0x5645    0x12  Code  Lc  pin_mux.o [1]
+CLOCK_EnablePll0             0x48f1    0x58  Code  Gb  fsl_clock.o [1]
+CLOCK_GetEr32kClkFreq        0x45fd    0x36  Code  Gb  fsl_clock.o [1]
+CLOCK_GetFastPeriphClkFreq
+                             0x4633    0x18  Code  Gb  fsl_clock.o [1]
+CLOCK_GetFixedFreqClkFreq
+                             0x47b3    0x1e  Code  Gb  fsl_clock.o [1]
+CLOCK_GetFllExtRefClkFreq
+                             0x44c9    0x56  Code  Lc  fsl_clock.o [1]
+CLOCK_GetFllFreq             0x4759    0x44  Code  Gb  fsl_clock.o [1]
+CLOCK_GetFllFreq::fllFactorTable
+                             0x7630    0x10  Data  Lc  fsl_clock.o [1]
+CLOCK_GetFllRefClkFreq       0x4545    0x20  Code  Lc  fsl_clock.o [1]
+CLOCK_GetFreq                0x464b    0xc2  Code  Gb  fsl_clock.o [1]
+CLOCK_GetInternalRefClkFreq
+                             0x479d    0x16  Code  Gb  fsl_clock.o [1]
+CLOCK_GetInternalRefClkSelectFreq
+                             0x451f    0x26  Code  Lc  fsl_clock.o [1]
+CLOCK_GetMcgExtClkFreq       0x44a7    0x22  Code  Lc  fsl_clock.o [1]
+CLOCK_GetOsc0ErClkDivFreq
+                             0x45bf    0x3e  Code  Gb  fsl_clock.o [1]
+CLOCK_GetOsc0ErClkUndivFreq
+                             0x458d    0x32  Code  Gb  fsl_clock.o [1]
+CLOCK_GetOscRangeFromFreq
+                             0x456d    0x20  Code  Lc  fsl_clock.o [1]
+CLOCK_GetOutClkFreq          0x4721    0x38  Code  Gb  fsl_clock.o [1]
+CLOCK_GetPll0Freq            0x47d1    0x54  Code  Gb  fsl_clock.o [1]
+CLOCK_GetPll0RefFreq         0x4565     0x8  Code  Lc  fsl_clock.o [1]
+CLOCK_InitOsc0               0x4949    0x50  Code  Gb  fsl_clock.o [1]
+CLOCK_SetEr32kClock          0x4479     0xe  Code  Lc  fsl_clock.o [1]
+CLOCK_SetExternalRefClkConfig
+                             0x4825     0x6  Code  Gb  fsl_clock.o [1]
+CLOCK_SetInternalRefClkConfig
+                             0x482b    0xc6  Code  Gb  fsl_clock.o [1]
+CLOCK_SetPbeMode             0x49b5    0x6e  Code  Gb  fsl_clock.o [1]
+CLOCK_SetSimConfig           0x470d    0x14  Code  Gb  fsl_clock.o [1]
+CLOCK_SetXtal0Freq           0x56fd     0x6  Code  Lc  clock_config.o [1]
+CSTACK$$Base            0x2000'3c00           --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'4000           --   Gb  - Linker created -
+ConvertRadixNumToString
+                             0x3047    0xc0  Code  Lc  fsl_str.o [1]
+DMA0_DriverIRQHandler        0x6529    0x10  Code  Gb  fsl_edma.o [1]
+DMA10_DriverIRQHandler       0x65cb    0x10  Code  Gb  fsl_edma.o [1]
+DMA11_DriverIRQHandler       0x65db    0x10  Code  Gb  fsl_edma.o [1]
+DMA12_DriverIRQHandler       0x65eb    0x10  Code  Gb  fsl_edma.o [1]
+DMA13_DriverIRQHandler       0x65fb    0x10  Code  Gb  fsl_edma.o [1]
+DMA14_DriverIRQHandler       0x660b    0x10  Code  Gb  fsl_edma.o [1]
+DMA15_DriverIRQHandler       0x661b    0x10  Code  Gb  fsl_edma.o [1]
+DMA1_DriverIRQHandler        0x6539    0x10  Code  Gb  fsl_edma.o [1]
+DMA2_DriverIRQHandler        0x6549    0x10  Code  Gb  fsl_edma.o [1]
+DMA3_DriverIRQHandler        0x6559    0x10  Code  Gb  fsl_edma.o [1]
+DMA4_DriverIRQHandler        0x656b    0x10  Code  Gb  fsl_edma.o [1]
+DMA5_DriverIRQHandler        0x657b    0x10  Code  Gb  fsl_edma.o [1]
+DMA6_DriverIRQHandler        0x658b    0x10  Code  Gb  fsl_edma.o [1]
+DMA7_DriverIRQHandler        0x659b    0x10  Code  Gb  fsl_edma.o [1]
+DMA8_DriverIRQHandler        0x65ab    0x10  Code  Gb  fsl_edma.o [1]
+DMA9_DriverIRQHandler        0x65bb    0x10  Code  Gb  fsl_edma.o [1]
+DSPI_CommonIRQHandler        0x6e81    0x2c  Code  Lc  fsl_dspi.o [1]
+DSPI_IsMaster                0x6e71    0x10  Code  Lc  fsl_dspi.o [1]
+DWT_DelayInit                0x5765    0x16  Code  Gb  clock_config.o [1]
+DWT_DelayMs                  0x57e5    0x12  Code  Gb  clock_config.o [1]
+DWT_DelayUs                  0x577b    0x32  Code  Gb  clock_config.o [1]
+DbgConsole_Init              0x2cbf    0xf2  Code  Gb  fsl_debug_console.o [1]
+DbgConsole_PrintCallback
+                             0x2c81    0x3e  Code  Lc  fsl_debug_console.o [1]
+DbgConsole_Printf            0x2db1    0x44  Code  Gb  fsl_debug_console.o [1]
+DbgConsole_SendDataReliable
+                             0x2c39    0x48  Code  Gb  fsl_debug_console.o [1]
+DelayInit                    0x575d     0x8  Code  Gb  clock_config.o [1]
+DelayMs                      0x57f7     0xc  Code  Gb  clock_config.o [1]
+Dir                     0x2000'2a72     0x1  Data  Gb  bldc.o [1]
+EDMA_HandleIRQ               0x6425   0x104  Code  Gb  fsl_edma.o [1]
+EnableIRQ                    0x5869    0x20  Code  Lc  key.o [1]
+GPIO_GetInstance             0x405b    0x2e  Code  Lc  fsl_gpio.o [1]
+GPIO_Init                    0x42c5    0xe4  Code  Gb  fsl_gpio.o [1]
+GPIO_InstanceTable           0x7544    0x14  Data  Lc  fsl_gpio.o [1]
+GPIO_PinConfig               0x40e9    0x48  Code  Gb  fsl_gpio.o [1]
+GPIO_PinInit                 0x4089    0x44  Code  Gb  fsl_gpio.o [1]
+GPIO_PinRead                 0x3a17     0xa  Code  Lc  bldc.o [1]
+GPIO_PinWrite                0x403d    0x1e  Code  Lc  fsl_gpio.o [1]
+GPIO_PinWrite                0x510d    0x1e  Code  Lc  main.o [1]
+GPIO_PortClearInterruptFlags
+                             0x40cd    0x1c  Code  Gb  fsl_gpio.o [1]
+GPIO_QuickInit               0x43a9    0x20  Code  Gb  fsl_gpio.o [1]
+HALLSensor_Detected_BLDC
+                             0x3ca1    0x8e  Code  Gb  bldc.o [1]
+HALL_Init                    0x3a21    0x78  Code  Gb  bldc.o [1]
+HAL_TimerInterruptHandle
+                             0x6fc1    0x32  Code  Lc  lptmr_adapter.o [1]
+HAL_UartGetStatus            0x3499    0x10  Code  Lc  uart_adapter.o [1]
+HAL_UartInit                 0x34a9    0xec  Code  Gb  uart_adapter.o [1]
+HAL_UartSendBlocking         0x3595    0x5a  Code  Gb  uart_adapter.o [1]
+HallSensor_GetPinState       0x3a99    0x4e  Code  Gb  bldc.o [1]
+HallSensor_GetPinState::State
+                        0x2000'0018     0x4  Data  Lc  bldc.o [1]
+I2C0_DriverIRQHandler        0x6fa1     0xe  Code  Gb  fsl_i2c.o [1]
+I2C_TransferCommonIRQHandler
+                             0x6f61    0x36  Code  Lc  fsl_i2c.o [1]
+KEY_Init                     0x58c5   0x180  Code  Gb  key.o [1]
+KEY_Scan                     0x5a45   0x15c  Code  Gb  key.o [1]
+KEY_Scan::key_up        0x2000'0012     0x1  Data  Lc  key.o [1]
+LED_Init                     0x581b    0x18  Code  Gb  led.o [1]
+LPTMR0_IRQHandler            0x6ff3     0xe  Code  Gb  lptmr_adapter.o [1]
+LPTMR_ClearStatusFlags       0x6fb9     0x8  Code  Lc  lptmr_adapter.o [1]
+LoadInt                      0x60a7    0x56  Code  Lc  xprintfsmall_nomb.o [2]
+OSC_SetCapLoad               0x449b     0xc  Code  Lc  fsl_clock.o [1]
+OSC_SetExtRefClkConfig       0x4487    0x14  Code  Lc  fsl_clock.o [1]
+OUTPUT_Fucntion_Init         0x5c25    0xc6  Code  Gb  output.o [1]
+PORTA_IRQHandler             0x5591    0x26  Code  Gb  main.o [1]
+PORT_InstanceTable           0x7558    0x14  Data  Lc  fsl_gpio.o [1]
+PORT_PinMuxConfig            0x4131    0x56  Code  Gb  fsl_gpio.o [1]
+PORT_PinOpenDrainConfig
+                             0x4187    0x5a  Code  Gb  fsl_gpio.o [1]
+PORT_PinPullConfig           0x41e1    0xbe  Code  Gb  fsl_gpio.o [1]
+PORT_SetPinInterruptConfig
+                             0x58a7    0x1e  Code  Lc  key.o [1]
+PORT_SetPinMux               0x39f9    0x1e  Code  Lc  bldc.o [1]
+PORT_SetPinMux               0x5889    0x1e  Code  Lc  key.o [1]
+PORT_SetPinMux               0x5c07    0x1e  Code  Lc  output.o [1]
+PORT_SetPinMux               0x5657    0x1e  Code  Lc  pin_mux.o [1]
+PWMA_Close_ABC_Channel       0x3f63    0xa6  Code  Gb  bldc.o [1]
+PWMA_Select_AB_Channel       0x3d2f    0xbc  Code  Gb  bldc.o [1]
+PWMA_Select_BC_Channel       0x3deb    0xbc  Code  Gb  bldc.o [1]
+PWMA_Select_CA_Channel       0x3ea7    0xbc  Code  Gb  bldc.o [1]
+PWM_BLDC_Init                0x3ae7   0x13a  Code  Gb  bldc.o [1]
+PWM_DRV_Init3PhPwm           0x3c21    0x80  Code  Lc  bldc.o [1]
+PWM_Duty                0x2000'0010     0x2  Data  Gb  bldc.o [1]
+PWM_GetDefaultConfig         0x245f    0x5c  Code  Gb  fsl_pwm.o [1]
+PWM_GetInstance              0x2291    0x34  Code  Lc  fsl_pwm.o [1]
+PWM_Init                     0x22c5   0x19a  Code  Gb  fsl_pwm.o [1]
+PWM_SetPwmLdok               0x39c3    0x36  Code  Lc  bldc.o [1]
+PWM_SetupPwm                 0x24bb   0x450  Code  Gb  fsl_pwm.o [1]
+PWM_StartTimer               0x39ad    0x16  Code  Lc  bldc.o [1]
+PWM_UpdatePwmDutycycle       0x290b   0x2e0  Code  Gb  fsl_pwm.o [1]
+PendSV_Handler               0x19e9          Code  Gb  portasm.o [1]
+RW$$Base                0x2000'0000           --   Gb  - Linker created -
+RW$$Limit               0x2000'0014           --   Gb  - Linker created -
+Region$$Table$$Base          0x72ec           --   Gb  - Linker created -
+Region$$Table$$Limit         0x7310           --   Gb  - Linker created -
+SIM_GPIOClockGateTable       0x756c    0x14  Data  Lc  fsl_gpio.o [1]
+SPI0_DriverIRQHandler        0x6ead    0x24  Code  Gb  fsl_dspi.o [1]
+SVC_Handler                  0x1a41          Code  Gb  portasm.o [1]
+SerialManager_Init           0x2eef    0x6a  Code  Gb  serial_manager.o [1]
+SerialManager_OpenReadHandle
+                             0x2faf    0x5e  Code  Gb  serial_manager.o [1]
+SerialManager_OpenWriteHandle
+                             0x2f59    0x56  Code  Gb  serial_manager.o [1]
+SerialManager_StartWriting
+                             0x2e45    0x36  Code  Lc  serial_manager.o [1]
+SerialManager_Write          0x2e7b    0x74  Code  Lc  serial_manager.o [1]
+SerialManager_WriteBlocking
+                             0x300d    0x14  Code  Gb  serial_manager.o [1]
+Serial_UartInit              0x3359    0x6e  Code  Gb  serial_port_uart.o [1]
+Serial_UartWrite             0x33c7    0x52  Code  Gb  serial_port_uart.o [1]
+StrFormatPrintf              0x3107   0x250  Code  Gb  fsl_str.o [1]
+SysTick_Handler              0x146d    0x28  Code  Gb  port.o [1]
+SystemCoreClock         0x2000'000c     0x4  Data  Gb  system_MKV46F16.o [1]
+SystemInit                   0x7145    0x28  Code  Gb  system_MKV46F16.o [1]
+UART0_DriverIRQHandler       0x393d    0x14  Code  Gb  fsl_uart.o [1]
+UART0_RX_TX_DriverIRQHandler
+                             0x3951     0xc  Code  Gb  fsl_uart.o [1]
+UART1_DriverIRQHandler       0x395d    0x14  Code  Gb  fsl_uart.o [1]
+UART1_RX_TX_DriverIRQHandler
+                             0x398d     0xc  Code  Gb  fsl_uart.o [1]
+UART_GetDefaultConfig        0x3821    0x58  Code  Gb  fsl_uart.o [1]
+UART_GetInstance             0x3625    0x36  Code  Gb  fsl_uart.o [1]
+UART_GetStatusFlags          0x3879    0x1a  Code  Gb  fsl_uart.o [1]
+UART_Init                    0x365b   0x1c6  Code  Gb  fsl_uart.o [1]
+UART_ReadBlocking            0x38ab    0x6a  Code  Gb  fsl_uart.o [1]
+UART_WriteBlocking           0x3893    0x18  Code  Gb  fsl_uart.o [1]
+USART_POLLING_Init           0x5e2d    0x2e  Code  Gb  pollingusart.o [1]
+XBARA_GetInstance            0x43db    0x2e  Code  Lc  fsl_xbara.o [1]
+XBARA_Init                   0x4409    0x16  Code  Gb  fsl_xbara.o [1]
+XBARA_SetSignalsConnection
+                             0x441f    0x44  Code  Gb  fsl_xbara.o [1]
+ZI$$Base                0x2000'0014           --   Gb  - Linker created -
+ZI$$Limit               0x2000'2a74           --   Gb  - Linker created -
+_LitobSmallNoMb              0x6239    0xce  Code  Lc  xprintfsmall_nomb.o [2]
+_PrintfSmallNoMb             0x5e89   0x214  Code  Gb  xprintfsmall_nomb.o [2]
+_Prout                       0x74f1    0x16  Code  Gb  xprout.o [2]
+_PutcharsSmallNoMb           0x6307    0x2e  Code  Lc  xprintfsmall_nomb.o [2]
+_PutfldSmallNoMb             0x60fd   0x13c  Code  Lc  xprintfsmall_nomb.o [2]
+__NVIC_EnableIRQ             0x5835    0x20  Code  Lc  key.o [1]
+__Vectors                       0x0           --   Gb  startup_MKV46F16.o [1]
+__Vectors_End                 0x400          Data  Gb  startup_MKV46F16.o [1]
+__Vectors_Size {Abs}          0x400           --   Gb  startup_MKV46F16.o [1]
+__aeabi_assert               0x2c1d    0x1c  Code  Gb  fsl_assert.o [1]
+__aeabi_memclr4              0x3041          Code  Gb  ABImemclr4.o [4]
+__aeabi_memcpy               0x219d          Code  Gb  ABImemcpy.o [4]
+__aeabi_memcpy4              0x21bd          Code  Gb  ABImemcpy.o [4]
+__aeabi_memcpy8              0x21bd          Code  Gb  ABImemcpy.o [4]
+__aeabi_memset               0x11ed          Code  Gb  ABImemset.o [4]
+__cmain                      0x7335          Code  Gb  cmain.o [4]
+__exit                       0x6411    0x14  Code  Gb  exit.o [5]
+__iar_Fail_s                 0x6371    0x1c  Code  Gb  xfail_s.o [2]
+__iar_Memchr                 0x63b1          Code  Gb  memchr.o [4]
+__iar_Memset                 0x11ed          Code  Gb  ABImemset.o [4]
+__iar_Memset4_word           0x342d          Code  Gb  ABImemset48.o [4]
+__iar_Memset8_word           0x342d          Code  Gb  ABImemset48.o [4]
+__iar_Memset_word            0x11f5          Code  Gb  ABImemset.o [4]
+__iar_Strchr                 0x6359          Code  Gb  strchr.o [4]
+__iar_copy_init3             0x71d9    0x2c  Code  Gb  copy_init3.o [4]
+__iar_data_init3             0x727d    0x28  Code  Gb  data_init.o [4]
+__iar_init_vfp               0x72c9          Code  Gb  fpinit_M.o [3]
+__iar_program_start          0x7781          Code  Gb  cstartup_M.o [4]
+__iar_zero_init3             0x2243    0x3a  Code  Gb  zero_init3.o [4]
+__low_level_init             0x7353     0x4  Code  Gb  low_level_init.o [2]
+__vector_table                  0x0          Data  Gb  startup_MKV46F16.o [1]
+__vector_table_0x1c            0x1c          Data  Gb  startup_MKV46F16.o [1]
+__write                      0x2e19    0x2a  Code  Wk  fsl_debug_console.o [1]
+_call_main                   0x7341          Code  Gb  cmain.o [4]
+_exit                        0x735d          Code  Gb  cexit.o [4]
+_main                        0x734f          Code  Gb  cmain.o [4]
+abort                        0x6409     0x6  Code  Gb  abort.o [2]
+exit                         0x7357     0x4  Code  Gb  exit.o [2]
+g_CADCChannelConfigDifferentialMask
+                             0x7620    0x10  Data  Lc  fsl_cadc.o [1]
+g_dspiHandle            0x2000'0040     0x4  Data  Lc  fsl_dspi.o [1]
+g_serialHandle          0x2000'003c     0x4  Data  Gb  fsl_debug_console.o [1]
+g_tMsg                  0x2000'28dc     0xc  Data  Gb  main.o [1]
+g_timerHandle           0x2000'28c8     0x4  Data  Lc  lptmr_adapter.o [1]
+g_xtal0Freq             0x2000'001c     0x4  Data  Gb  fsl_clock.o [1]
+main                         0x512b    0x40  Code  Gb  main.o [1]
+mcgConfig_BOARD_BootClockRUN
+                             0x76c0     0xc  Data  Gb  clock_config.o [1]
+memchr                       0x63b1          Code  Gb  memchr.o [4]
+oscConfig_BOARD_BootClockRUN
+                             0x7794     0x8  Data  Gb  clock_config.o [1]
+pcInterruptPriorityRegisters
+                             0x7978     0x4  Data  Lc  port.o [1]
+printf                       0x5e61    0x28  Code  Gb  printf.o [2]
+prvAddCurrentTaskToDelayedList
+                              0xebd    0x82  Code  Lc  tasks.o [1]
+prvAddNewTaskToReadyList
+                              0x587    0x9e  Code  Lc  tasks.o [1]
+prvCheckForValidListAndQueue
+                             0x1979    0x46  Code  Lc  timers.o [1]
+prvCheckTasksWaitingTermination
+                              0xb87    0x3e  Code  Lc  tasks.o [1]
+prvCopyDataFromQueue         0x2049    0x36  Code  Lc  queue.o [1]
+prvCopyDataToQueue           0x1fad    0x9c  Code  Lc  queue.o [1]
+prvDeleteTCB                  0xbc5    0x12  Code  Lc  tasks.o [1]
+prvGetNextExpireTime         0x170b    0x28  Code  Lc  timers.o [1]
+prvHeapInit                  0x110d    0x62  Code  Lc  heap_4.o [1]
+prvIdleTask                   0xb05    0x24  Code  Lc  tasks.o [1]
+prvInitialiseNewQueue        0x1b83    0x36  Code  Lc  queue.o [1]
+prvInitialiseNewTask          0x485   0x102  Code  Lc  tasks.o [1]
+prvInitialiseTaskLists        0xb31    0x56  Code  Lc  tasks.o [1]
+prvInsertBlockIntoFreeList
+                             0x116f    0x5e  Code  Lc  heap_4.o [1]
+prvInsertTimerInActiveList
+                             0x175b    0x52  Code  Lc  timers.o [1]
+prvIsQueueEmpty              0x20ed    0x1c  Code  Lc  queue.o [1]
+prvIsQueueFull               0x2109    0x1e  Code  Lc  queue.o [1]
+prvProcessExpiredTimer       0x1611    0x6c  Code  Lc  timers.o [1]
+prvProcessReceivedCommands
+                             0x17ad   0x13e  Code  Lc  timers.o [1]
+prvProcessTimerOrBlockTask
+                             0x1697    0x74  Code  Lc  timers.o [1]
+prvResetNextTaskUnblockTime
+                              0xbd7    0x26  Code  Lc  tasks.o [1]
+prvSampleTimeNow             0x1733    0x28  Code  Lc  timers.o [1]
+prvSampleTimeNow::xLastTime
+                        0x2000'2a68     0x4  Data  Lc  timers.o [1]
+prvSwitchTimerLists          0x18eb    0x8e  Code  Lc  timers.o [1]
+prvTaskExitError             0x1315    0x2a  Code  Lc  port.o [1]
+prvTimerTask                 0x167d    0x1a  Code  Lc  timers.o [1]
+prvUnlockQueue               0x207f    0x6e  Code  Lc  queue.o [1]
+putchar                      0x7311    0x20  Code  Gb  putchar.o [2]
+pvPortMalloc                  0xf79   0x120  Code  Gb  heap_4.o [1]
+pxCurrentTCB            0x2000'292c     0x4  Data  Gb  tasks.o [1]
+pxCurrentTimerList      0x2000'2a58     0x4  Data  Lc  timers.o [1]
+pxDelayedTaskList       0x2000'29bc     0x4  Data  Lc  tasks.o [1]
+pxEnd                   0x2000'28b8     0x4  Data  Lc  heap_4.o [1]
+pxOverflowDelayedTaskList
+                        0x2000'29c0     0x4  Data  Lc  tasks.o [1]
+pxOverflowTimerList     0x2000'2a5c     0x4  Data  Lc  timers.o [1]
+pxPortInitialiseStack        0x12ed    0x28  Code  Gb  port.o [1]
+pxReadyTasksLists       0x2000'2930    0x64  Data  Lc  tasks.o [1]
+recoder_number          0x2000'2a70     0x2  Data  Gb  main.o [1]
+s_EDMAHandle            0x2000'004c    0x40  Data  Lc  fsl_edma.o [1]
+s_UartAdapterBase            0x783c     0x8  Data  Lc  uart_adapter.o [1]
+s_cadcBases                  0x795c     0x4  Data  Lc  fsl_cadc.o [1]
+s_cadcClocks                 0x7960     0x4  Data  Lc  fsl_cadc.o [1]
+s_debugConsoleState     0x2000'0020    0x1c  Data  Lc  fsl_debug_console.o [1]
+s_dspiMasterIsr         0x2000'0044     0x4  Data  Lc  fsl_dspi.o [1]
+s_dspiSlaveIsr          0x2000'0048     0x4  Data  Lc  fsl_dspi.o [1]
+s_fastIrcFreq           0x2000'0004     0x4  Data  Lc  fsl_clock.o [1]
+s_flexcanHandle         0x2000'008c     0x8  Data  Lc  fsl_flexcan.o [1]
+s_flexcanIsr            0x2000'0094     0x4  Data  Lc  fsl_flexcan.o [1]
+s_gpioBases                  0x7594    0x14  Data  Lc  fsl_gpio.o [1]
+s_i2cHandle             0x2000'0098     0x4  Data  Lc  fsl_i2c.o [1]
+s_i2cMasterIsr          0x2000'009c     0x4  Data  Lc  fsl_i2c.o [1]
+s_i2cSlaveIsr           0x2000'00a0     0x4  Data  Lc  fsl_i2c.o [1]
+s_portBases                  0x7580    0x14  Data  Lc  fsl_gpio.o [1]
+s_pwmBases                   0x7964     0x4  Data  Lc  fsl_pwm.o [1]
+s_pwmClocks                  0x7660    0x10  Data  Lc  fsl_pwm.o [1]
+s_slowIrcFreq           0x2000'0000     0x4  Data  Lc  fsl_clock.o [1]
+s_uartBases                  0x77c4     0x8  Data  Lc  fsl_uart.o [1]
+s_uartClock                  0x77cc     0x8  Data  Lc  fsl_uart.o [1]
+s_uartHandle            0x2000'00a4     0x8  Data  Lc  fsl_uart.o [1]
+s_uartIsr               0x2000'00ac     0x4  Data  Lc  fsl_uart.o [1]
+s_xbaraBases                 0x7968     0x4  Data  Lc  fsl_xbara.o [1]
+s_xbaraClock                 0x796c     0x4  Data  Lc  fsl_xbara.o [1]
+sec_hand                0x2000'2a6c     0x4  Data  Lc  xfail_s.o [2]
+simConfig_BOARD_BootClockRUN
+                             0x778c     0x8  Data  Gb  clock_config.o [1]
+strchr                       0x6359          Code  Gb  strchr.o [4]
+strlen                       0x3461          Code  Gb  strlen.o [4]
+ucHeap                  0x2000'00b0  0x2800  Data  Lc  heap_4.o [1]
+ucMaxSysCallPriority    0x2000'2a73     0x1  Data  Lc  port.o [1]
+ulMaxPRIGROUPValue      0x2000'28e8     0x4  Data  Lc  port.o [1]
+uwStep                  0x2000'0014     0x4  Data  Gb  bldc.o [1]
+uxCriticalNesting       0x2000'0008     0x4  Data  Lc  port.o [1]
+uxCurrentNumberOfTasks  0x2000'2a04     0x4  Data  Lc  tasks.o [1]
+uxDeletedTasksWaitingCleanUp
+                        0x2000'29ec     0x4  Data  Lc  tasks.o [1]
+uxListRemove                 0x12c5    0x28  Code  Gb  list.o [1]
+uxPendedTicks           0x2000'2a14     0x4  Data  Lc  tasks.o [1]
+uxSchedulerSuspended    0x2000'2a2c     0x4  Data  Lc  tasks.o [1]
+uxTaskNumber            0x2000'2a20     0x4  Data  Lc  tasks.o [1]
+uxTopReadyPriority      0x2000'2a0c     0x4  Data  Lc  tasks.o [1]
+vListInitialise              0x1253    0x1e  Code  Gb  list.o [1]
+vListInitialiseItem          0x1271     0x6  Code  Gb  list.o [1]
+vListInsert                  0x128f    0x36  Code  Gb  list.o [1]
+vListInsertEnd               0x1277    0x18  Code  Gb  list.o [1]
+vPortEnableVFP               0x1a7d          Code  Gb  portasm.o [1]
+vPortEnterCritical           0x140d    0x34  Code  Gb  port.o [1]
+vPortExitCritical            0x1441    0x2c  Code  Gb  port.o [1]
+vPortFree                    0x1099    0x74  Code  Gb  heap_4.o [1]
+vPortStartFirstTask          0x1a5d          Code  Gb  portasm.o [1]
+vPortValidateInterruptPriority
+                             0x1495    0x4e  Code  Gb  port.o [1]
+vQueueAddToRegistry          0x2127    0x26  Code  Gb  queue.o [1]
+vQueueWaitForMessageRestricted
+                             0x2151    0x4c  Code  Gb  queue.o [1]
+vTaskBLDC                    0x522d    0x8a  Code  Lc  main.o [1]
+vTaskCOTL                    0x52b7   0x294  Code  Lc  main.o [1]
+vTaskDelay                    0x625    0x4e  Code  Gb  tasks.o [1]
+vTaskInternalSetTimeOutState
+                              0xa51    0x12  Code  Gb  tasks.o [1]
+vTaskMissedYield              0xafb     0xa  Code  Gb  tasks.o [1]
+vTaskPlaceOnEventList         0x93b    0x34  Code  Gb  tasks.o [1]
+vTaskPlaceOnEventListRestricted
+                              0x985    0x40  Code  Gb  tasks.o [1]
+vTaskStartScheduler           0x673    0x72  Code  Gb  tasks.o [1]
+vTaskSuspendAll               0x6e5     0xc  Code  Gb  tasks.o [1]
+vTaskSwitchContext            0x8cf    0x6c  Code  Gb  tasks.o [1]
+vTaskUSART                   0x516b    0xc2  Code  Lc  main.o [1]
+xActiveTimerList1       0x2000'2a30    0x14  Data  Lc  timers.o [1]
+xActiveTimerList2       0x2000'2a44    0x14  Data  Lc  timers.o [1]
+xBlockAllocatedBit      0x2000'28c4     0x4  Data  Lc  heap_4.o [1]
+xDelayedTaskList1       0x2000'2994    0x14  Data  Lc  tasks.o [1]
+xDelayedTaskList2       0x2000'29a8    0x14  Data  Lc  tasks.o [1]
+xFreeBytesRemaining     0x2000'28bc     0x4  Data  Lc  heap_4.o [1]
+xHandleTaskBLDC         0x2000'28d4     0x4  Data  Lc  main.o [1]
+xHandleTaskCOTL         0x2000'28d8     0x4  Data  Lc  main.o [1]
+xHandleTaskSUBJ         0x2000'28d0     0x4  Data  Lc  main.o [1]
+xHandleTaskUSART        0x2000'28cc     0x4  Data  Lc  main.o [1]
+xHeapStructSize              0x7970     0x4  Data  Lc  heap_4.o [1]
+xIdleTaskHandle         0x2000'2a28     0x4  Data  Lc  tasks.o [1]
+xMinimumEverFreeBytesRemaining
+                        0x2000'28c0     0x4  Data  Lc  heap_4.o [1]
+xNextTaskUnblockTime    0x2000'2a24     0x4  Data  Lc  tasks.o [1]
+xNumOfOverflows         0x2000'2a1c     0x4  Data  Lc  tasks.o [1]
+xPendingReadyList       0x2000'29c4    0x14  Data  Lc  tasks.o [1]
+xPortStartScheduler          0x133f    0xce  Code  Gb  port.o [1]
+xQueueGenericCreate          0x1b2d    0x56  Code  Gb  queue.o [1]
+xQueueGenericReset           0x1a99    0x94  Code  Gb  queue.o [1]
+xQueueGenericSend            0x1bb9   0x1a6  Code  Gb  queue.o [1]
+xQueueGenericSendFromISR
+                             0x1d5f    0xe0  Code  Gb  queue.o [1]
+xQueueReceive                0x1e3f   0x16a  Code  Gb  queue.o [1]
+xQueueRegistry          0x2000'28ec    0x40  Data  Gb  queue.o [1]
+xSchedulerRunning       0x2000'2a10     0x4  Data  Lc  tasks.o [1]
+xStart                  0x2000'28b0     0x8  Data  Lc  heap_4.o [1]
+xSuspendedTaskList      0x2000'29f0    0x14  Data  Lc  tasks.o [1]
+xTaskCheckForTimeOut          0xa6d    0x8e  Code  Gb  tasks.o [1]
+xTaskCreate                   0x411    0x74  Code  Gb  tasks.o [1]
+xTaskGenericNotify            0xd91   0x118  Code  Gb  tasks.o [1]
+xTaskGetSchedulerState        0xbfd    0x20  Code  Gb  tasks.o [1]
+xTaskGetTickCount             0x7d5     0x8  Code  Gb  tasks.o [1]
+xTaskIncrementTick            0x7dd    0xf2  Code  Gb  tasks.o [1]
+xTaskNotifyWait               0xced    0x9a  Code  Gb  tasks.o [1]
+xTaskPriorityDisinherit
+                              0xc25    0xb2  Code  Gb  tasks.o [1]
+xTaskRemoveFromEventList
+                              0x9c9    0x82  Code  Gb  tasks.o [1]
+xTaskResumeAll                0x6f1    0xe4  Code  Gb  tasks.o [1]
+xTasksWaitingTermination
+                        0x2000'29d8    0x14  Data  Lc  tasks.o [1]
+xTickCount              0x2000'2a08     0x4  Data  Lc  tasks.o [1]
+xTimerCreateTimerTask        0x1549    0x46  Code  Gb  timers.o [1]
+xTimerGenericCommand         0x158f    0x82  Code  Gb  timers.o [1]
+xTimerQueue             0x2000'2a60     0x4  Data  Lc  timers.o [1]
+xTimerTaskHandle        0x2000'2a64     0x4  Data  Lc  timers.o [1]
+xYieldPending           0x2000'2a18     0x4  Data  Lc  tasks.o [1]
+
+
+[1] = D:\DRV8302_mkv44f128vlh_bldc_pro\DRV8302_mkv46f258vlh16_sevro_soft\Drv8302_freeRTOS_mkv46f256vlh16_sevro_soft\iar\debug\obj
+[2] = dl7M_tln.a
+[3] = m7M_tls.a
+[4] = rt7M_tl.a
+[5] = shb_l.a
+
+  27 188 bytes of readonly  code memory
+   3 916 bytes of readonly  data memory
+  11 891 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
