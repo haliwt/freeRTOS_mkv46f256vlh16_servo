@@ -1854,7 +1854,7 @@ TickType_t xTaskGetIdleRunTimeCounter( void ) PRIVILEGED_FUNCTION;
  * \ingroup TaskNotifications
  */
 BaseType_t xTaskGenericNotify( TaskHandle_t xTaskToNotify, uint32_t ulValue, eNotifyAction eAction, uint32_t *pulPreviousNotificationValue ) PRIVILEGED_FUNCTION;
-#define xTaskNotify( xTaskToNotify, ulValue, eAction ) xTaskGenericNotify( ( xTaskToNotify ), ( ulValue ), ( eAction ), NULL )
+#define xTaskNotify( xTaskToNotify, ulValue, eAction )   	xTaskGenericNotify( ( xTaskToNotify ), ( ulValue ), ( eAction ), NULL )
 #define xTaskNotifyAndQuery( xTaskToNotify, ulValue, eAction, pulPreviousNotifyValue ) xTaskGenericNotify( ( xTaskToNotify ), ( ulValue ), ( eAction ), ( pulPreviousNotifyValue ) )
 
 /**

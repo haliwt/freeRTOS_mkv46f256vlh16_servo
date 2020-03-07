@@ -161,7 +161,7 @@ void KEY_Init(void)
 			  /* 等待按键弹开，退出按键扫描函数 */
 			 while(WHEEL_KEY==1);
 			   /* 按键扫描完毕，确定按键按下 */
-			return WHEEL_PRES;
+			return PID_INPUT_PRES;
 		 }
 		 else if(WIPERS_KEY==1) 
 		 {

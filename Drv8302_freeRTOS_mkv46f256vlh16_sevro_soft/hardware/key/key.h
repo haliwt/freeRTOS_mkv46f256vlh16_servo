@@ -60,7 +60,7 @@ typedef enum
 #define DIGITAL_REDUCE_PRES     5      //PTA13,
 #define DOOR_PRES               6      //PTA2,
 #define HALL_PRES               7      //PTA4,
-#define WHEEL_PRES              8      //PTA5,
+#define PID_INPUT_PRES              8      //PTA5,
 #define WIPERS_PRES             9      //PTE30,
 #define AIR_PRES                10      //PTE29,
 
