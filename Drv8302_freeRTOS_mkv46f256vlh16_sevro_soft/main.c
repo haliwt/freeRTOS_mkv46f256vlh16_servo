@@ -111,7 +111,7 @@ int main(void)
     ABC_POWER_OUTPUT_Init();
     /* Set the PWM Fault inputs to a low value */
     PWM_BLDC_Init();
-    USART_POLLING_Init();
+  //  USART_POLLING_Init();
      
     /* 创建任务 */
 	AppTaskCreate();
@@ -135,10 +135,10 @@ static void vTaskUSART(void *pvParameters)
 {
  // TickType_t xLastWakeTime;
  // const TickType_t xFrequency = 300;
-  uint8_t i,ch;
+  uint8_t i,ch,D0,D1,D2,D3,RxBuff[4];
   MSG_T *ptMsg;
  
-  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(1); /* 设置最大等待时间为5ms */
+  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(200); /* 设置最大等待时间为300ms */
   /* 初始化结构体指针 */
 	ptMsg = &g_tMsg;
 	
@@ -149,34 +149,33 @@ static void vTaskUSART(void *pvParameters)
 
   while(1)
     {
-    
-      printf("vTaskUSART-1 \r\n");
-   
-       UART_ReadBlocking(DEMO_UART, ptMsg->usData, 4);
+        UART_ReadBlocking(DEMO_UART, RxBuff, 4);
       
-        for(i=0;i<4;i++)
-		{
-          //ch=ptMsg->usData[i];
-		  printf("ptMsg->usData[i]= %d \r\n",ptMsg->usData[i]);
+        for(i=0;i<4;i++){
+          D0 =RxBuff[0];
+		  D1 =RxBuff[1];
+		  D2 =RxBuff[2];
+		  D3 =RxBuff[3];
+		  PRINTF("D0 D1 D2 D3 =%d %d %d %d  \r\n",D0,D1,D2,D3);
 
 		}
       
-        if(ptMsg->usData[0] == 0x01) //'1' = 0x31
+        if(D0 == 0x01) //'1' = 0x31
          {
              
 		      xTaskNotify(xHandleTaskCOTL,      /* 目标任务 */
-								ptMsg->usData[2],              /* 发送数据 */
+								D1,              /* 发送数据 */
 								eSetValueWithOverwrite);/* 上次目标任务没有执行，会被覆盖 */
-               printf("Send to xHanderCONT is OK \n");
+              PRINTF("Send to xHanderCONT is OK \n");
                
          }
-        if(ptMsg->usData[0]== 0x02)
+        if(D0== 0x02)
         {
            
 	      xTaskNotify(xHandleTaskSUBJ,      /* 目标任务 */
 							ptMsg->usData[2],              /* 发送数据 */
 							eSetValueWithOverwrite);/* 上次目标任务没有执行，会被覆盖 */
-		  					printf("Send to xHanderCONT DIR CCW \n");
+		  					PRINTF("Send to xHanderCONT DIR CCW \n");
         }
 		if(ptMsg->usData[0]== 0x3)/*接收PID 参数*/
         {
@@ -184,7 +183,7 @@ static void vTaskUSART(void *pvParameters)
 	      xTaskNotify(xHandleTaskSUBJ,      /* 目标任务 */
 							ptMsg->usData[2],              /* 发送数据 */
 							eSetValueWithOverwrite);/* 上次目标任务没有执行，会被覆盖 */
-		  		printf("Send to xHanderCONT StartUp \n");
+		  		PRINTF("Send to xHanderCONT StartUp \n");
         }
 	    taskYIELD(); //vTaskDelay(xMaxBlockTime);// vTaskDelayUntil(&xLastWakeTime, xFrequency);
     }
