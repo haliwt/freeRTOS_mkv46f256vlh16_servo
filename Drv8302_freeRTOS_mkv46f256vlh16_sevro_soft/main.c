@@ -138,7 +138,7 @@ static void vTaskUSART(void *pvParameters)
   uint8_t i,ch;
   MSG_T *ptMsg;
  
-  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(300); /* 设置最大等待时间为5ms */
+  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(50); /* 设置最大等待时间为5ms */
   /* 初始化结构体指针 */
 	ptMsg = &g_tMsg;
 	
@@ -179,7 +179,7 @@ static void vTaskUSART(void *pvParameters)
 							eSetValueWithOverwrite);/* 上次目标任务没有执行，会被覆盖 */
         }
 		//taskYIELD();//vTaskDelay(xMaxBlockTime);
-	    vTaskDelay(xMaxBlockTime);// vTaskDelayUntil(&xLastWakeTime, xFrequency);
+	    taskYIELD(); //vTaskDelay(xMaxBlockTime);// vTaskDelayUntil(&xLastWakeTime, xFrequency);
     }
 }
 /*********************************************************************************************************
@@ -362,7 +362,16 @@ static void vTaskBLDC(void *pvParameters)
 				  GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,1);
 				  uwStep = HallSensor_GetPinState();
 				  HALLSensor_Detected_BLDC(); 
-			}
+		}
+		else{
+			// #ifdef DRV8302
+		 	GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,0);
+		 //   #endif 
+	      DelayMs(50);
+	      GPIO_PortToggle(GPIOD,1<<BOARD_LED1_GPIO_PIN);
+	      DelayMs(50);
+			
+		}
      
 
 	
@@ -418,7 +427,7 @@ static void vTaskCOTL(void *pvParameters)
 			/****************digitalkey coder******************/
 			 if(ulValue == 0x01)
 			 {
-                ucKeyCode =ABC_POWER_PRES  ; 
+                ucKeyCode =DIR_CW_PRES  ; 
 			 }
 			 if(ulValue == 0x2)
 			 {
@@ -426,7 +435,7 @@ static void vTaskCOTL(void *pvParameters)
 			 }
 			 if(ulValue == 0x4)
 			 {
-                ucKeyCode =DIR_PRES  ; 
+                ucKeyCode =DIR_CCW_PRES  ; 
 			 }
 			 if(ulValue == 0x07)
 			 {
@@ -472,10 +481,11 @@ static void vTaskCOTL(void *pvParameters)
                switch(ucKeyCode)//if(ptMsg->ucMessageID == 0x32)
                 { 
                  
-                  case ABC_POWER_PRES :
+                  case DIR_CW_PRES : /*PTE29-DIR_CW_PRES ://Dir =1 ,PTE29-CW,KEY1*/
 
-				  PRINTF("ABC_PRES key \r\n");
-				     abc_power_s++;
+				  PRINTF("DIR_CW_PRES key \r\n");
+				   Dir =1;
+				  #if 0
 				  if((abc_power_s ==1)||(recoder_number.break_f==1))
 				  	{
                        ucControl = 0x01;
@@ -501,6 +511,7 @@ static void vTaskCOTL(void *pvParameters)
                      printf("ABC POWER IS STOP \n");
 
 					}
+					#endif 
 				  	break;
 
 				 case START_PRES:
@@ -529,10 +540,11 @@ static void vTaskCOTL(void *pvParameters)
                  
 				  break;
 				  
-				 case DIR_PRES: //Dir = 0;PTE24 =CCW KEY3
+				 case DIR_CCW_PRES: //Dir = 0;PTE24 =CCW KEY3
 
 			      recoder_number.dir_change++;
 	  			 PRINTF(" DIR_change = %d  \r\n", recoder_number.dir_change);
+				 Dir =0;
 	  			 if(recoder_number.dir_change == 1)
 	   				{
                         LED1 =0;

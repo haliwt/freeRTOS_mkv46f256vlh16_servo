@@ -106,7 +106,7 @@ void KEY_Init(void)
 			/* 等待按键弹开，退出按键扫描函数 */
 			  while(ABC_POWER_KEY==1);
 			   /* 按键扫描完毕，确定按键按下 */
-			 return ABC_POWER_PRES;
+			 return DIR_CW_PRES;
 		 }
 	
 		 else if(START_KEY == 1)
@@ -122,7 +122,7 @@ void KEY_Init(void)
 			 while(DIR_KEY==1);
 			   /* 按键扫描完毕，确定按键按下 */
 	
-			 return DIR_PRES;
+			 return DIR_CCW_PRES;
 		 }
 		 else if(DIGITAL_ADD_KEY==1)		
 		 {
