@@ -49,7 +49,7 @@ output_t recoder_number;
 
 
 static void vTaskUSART(void *pvParameters);
-static void vTaskSUBJ(void *pvParameters);
+//static void vTaskSUBJ(void *pvParameters);
 static void vTaskBLDC(void *pvParameters);
 static void vTaskCOTL(void *pvParameters);
 
@@ -59,7 +59,7 @@ static void AppTaskCreate (void);
 
 /*
 **********************************************************************************************************
-											±äÁ¿ÉùÃ÷
+											ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 **********************************************************************************************************
 */
 static TaskHandle_t xHandleTaskUSART = NULL;
@@ -79,7 +79,7 @@ typedef struct Msg
 	
 }MSG_T;
 
-MSG_T   g_tMsg; /* ¶¨ÒåÒ»¸ö½á¹¹ÌåÓÃÓÚÏûÏ¢¶ÓÁÐ */
+MSG_T   g_tMsg; /* ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½á¹¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ */
 
 
 
@@ -113,10 +113,10 @@ int main(void)
     PWM_BLDC_Init();
   //  USART_POLLING_Init();
      
-    /* ´´½¨ÈÎÎñ */
+    /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	AppTaskCreate();
     
-    /* ´´½¨ÈÎÎñÍ¨ÐÅ»úÖÆ */
+    /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½Å»ï¿½ï¿½ï¿½ */
 //	AppObjCreate();// WT.EDIT log_init(10, MAX_LOG_LENGTH);
     
     vTaskStartScheduler();
@@ -125,11 +125,11 @@ int main(void)
 }
 
 /******************************************************************************************************
-*	º¯ Êý Ãû: vTaskTaskUSART
-*	¹¦ÄÜËµÃ÷: ½Ó¿ÚÏûÏ¢´¦Àí¡£
-*	ÐÎ    ²Î: pvParameters ÊÇÔÚ´´½¨¸ÃÈÎÎñÊ±´«µÝµÄÐÎ²Î
-*	·µ »Ø Öµ: ÎÞ
-*   ÓÅ ÏÈ ¼¶: 1  (ÊýÖµÔ½Ð¡ÓÅÏÈ¼¶Ô½µÍ£¬×îµÍÓÅÏÈ¼¶)
+*	ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½: vTaskTaskUSART
+*	ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½Ó¿ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*	ï¿½ï¿½    ï¿½ï¿½: pvParameters ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ýµï¿½ï¿½Î²ï¿½
+*	ï¿½ï¿½ ï¿½ï¿½ Öµ: ï¿½ï¿½
+*   ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½: 1  (ï¿½ï¿½ÖµÔ½Ð¡ï¿½ï¿½ï¿½È¼ï¿½Ô½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½)
 ********************************************************************************************************/
 static void vTaskUSART(void *pvParameters)
 {
@@ -138,11 +138,11 @@ static void vTaskUSART(void *pvParameters)
   uint8_t i,ch,D0,D1,D2,D3,RxBuff[4];
   MSG_T *ptMsg;
  
-  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(200); /* ÉèÖÃ×î´óµÈ´ýÊ±¼äÎª300ms */
-  /* ³õÊ¼»¯½á¹¹ÌåÖ¸Õë */
+  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(300); /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½Ê±ï¿½ï¿½Îª300ms */
+  /* ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½á¹¹ï¿½ï¿½Ö¸ï¿½ï¿½ */
 	ptMsg = &g_tMsg;
 	
-	/* ³õÊ¼»¯Êý×é */
+	/* ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	ptMsg->ucMessageID = 0;
     for(i=0;i<4;i++)
         ch =ptMsg->usData[i];
@@ -163,26 +163,26 @@ static void vTaskUSART(void *pvParameters)
         if(D0 == 0x01) //'1' = 0x31
          {
              
-		      xTaskNotify(xHandleTaskCOTL,      /* Ä¿±êÈÎÎñ */
-								D1,              /* ·¢ËÍÊý¾Ý */
-								eSetValueWithOverwrite);/* ÉÏ´ÎÄ¿±êÈÎÎñÃ»ÓÐÖ´ÐÐ£¬»á±»¸²¸Ç */
+		      xTaskNotify(xHandleTaskCOTL,      /* Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+								D1,              /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+								eSetValueWithOverwrite);/* ï¿½Ï´ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½á±»ï¿½ï¿½ï¿½ï¿½ */
               PRINTF("Send to xHanderCONT is OK \n");
                
          }
         if(D0== 0x02)
         {
            
-	      xTaskNotify(xHandleTaskSUBJ,      /* Ä¿±êÈÎÎñ */
-							ptMsg->usData[2],              /* ·¢ËÍÊý¾Ý */
-							eSetValueWithOverwrite);/* ÉÏ´ÎÄ¿±êÈÎÎñÃ»ÓÐÖ´ÐÐ£¬»á±»¸²¸Ç */
+	      xTaskNotify(xHandleTaskSUBJ,      /* Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+							ptMsg->usData[2],              /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+							eSetValueWithOverwrite);/* ï¿½Ï´ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½á±»ï¿½ï¿½ï¿½ï¿½ */
 		  					PRINTF("Send to xHanderCONT DIR CCW \n");
         }
-		if(ptMsg->usData[0]== 0x3)/*½ÓÊÕPID ²ÎÊý*/
+		if(ptMsg->usData[0]== 0x3)/*ï¿½ï¿½ï¿½ï¿½PID ï¿½ï¿½ï¿½ï¿½*/
         {
            
-	      xTaskNotify(xHandleTaskSUBJ,      /* Ä¿±êÈÎÎñ */
-							ptMsg->usData[2],              /* ·¢ËÍÊý¾Ý */
-							eSetValueWithOverwrite);/* ÉÏ´ÎÄ¿±êÈÎÎñÃ»ÓÐÖ´ÐÐ£¬»á±»¸²¸Ç */
+	      xTaskNotify(xHandleTaskSUBJ,      /* Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+							ptMsg->usData[2],              /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+							eSetValueWithOverwrite);/* ï¿½Ï´ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½á±»ï¿½ï¿½ï¿½ï¿½ */
 		  		PRINTF("Send to xHanderCONT StartUp \n");
         }
 	    taskYIELD(); //vTaskDelay(xMaxBlockTime);// vTaskDelayUntil(&xLastWakeTime, xFrequency);
@@ -190,11 +190,11 @@ static void vTaskUSART(void *pvParameters)
 }
 
 /*********************************************************************************************************
-*	º¯ Êý Ãû: vTaskBLDC
-*	¹¦ÄÜËµÃ÷: Ê¹ÓÃº¯ÊýxQueueReceive½ÓÊÕÈÎÎñvTaskTaskUserIF·¢ËÍµÄÏûÏ¢¶ÓÁÐÊý¾Ý(xQueue2)	
-*	ÐÎ    ²Î: pvParameters ÊÇÔÚ´´½¨¸ÃÈÎÎñÊ±´«µÝµÄÐÎ²Î
-*	·µ »Ø Öµ: ÎÞ
-*   ÓÅ ÏÈ ¼¶: 3  
+*	ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½: vTaskBLDC
+*	ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: Ê¹ï¿½Ãºï¿½ï¿½ï¿½xQueueReceiveï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vTaskTaskUserIFï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(xQueue2)	
+*	ï¿½ï¿½    ï¿½ï¿½: pvParameters ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ýµï¿½ï¿½Î²ï¿½
+*	ï¿½ï¿½ ï¿½ï¿½ Öµ: ï¿½ï¿½
+*   ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½: 3  
 *********************************************************************************************************/
 static void vTaskBLDC(void *pvParameters)
 {
@@ -208,26 +208,26 @@ static void vTaskBLDC(void *pvParameters)
     volatile uint16_t pwm_f=0;
 	uint16_t sampleMask;
 	BaseType_t xResult;
-    const TickType_t xMaxBlockTime = pdMS_TO_TICKS(1); /* ÉèÖÃ×î´óµÈ´ýÊ±¼äÎª300ms */
+    const TickType_t xMaxBlockTime = pdMS_TO_TICKS(1); /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½Ê±ï¿½ï¿½Îª300ms */
 	uint32_t ucConValue;
-    uint16_t dirvalue;
+   
 	
 	while(1)
     {       
 
         xResult = xTaskNotifyWait(0x00000000,      
 						          0xFFFFFFFF,      
-						          &ucConValue,        /* ´æ´¢ulNotifiedValueÔÚulvalueÖÐ */
-						          xMaxBlockTime);  /* ×î´óÑÓ³ÙÊ±¼ä */
+						          &ucConValue,        /* ï¿½æ´¢ulNotifiedValueï¿½ï¿½ulvalueï¿½ï¿½ */
+						          xMaxBlockTime);  /* ï¿½ï¿½ï¿½ï¿½Ó³ï¿½Ê±ï¿½ï¿½ */
 	  if(xResult == pdPASS)
 		{
-			/* ½ÓÊÕÊý¾Ý³É¹¦ */
+			/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý³É¹ï¿½ */
           printf("vTaskBLDC  = %#x\r\n",ucConValue );
 		  ucValue = ucConValue ;
 		}
 		else
 		{
-			/* ³¬Ê± */
+			/* ï¿½ï¿½Ê± */
           LED2= !LED2;
 		}
     
@@ -257,27 +257,27 @@ static void vTaskBLDC(void *pvParameters)
 
 /*********************************************************************************************************
 *
-*	º¯ Êý Ãû: vTaskCOTL
-*	¹¦ÄÜËµÃ÷: ½ÓÊÕÎïÀí°´¼üºÍÊý×Ö°´¼üµÄÃüÁî
-*	ÐÎ    ²Î: pvParameters ÊÇÔÚ´´½¨¸ÃÈÎÎñÊ±´«µÝµÄÐÎ²Î
-*	·µ »Ø Öµ: ÎÞ
-*   ÓÅ ÏÈ ¼¶: 4  
+*	ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½: vTaskCOTL
+*	ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*	ï¿½ï¿½    ï¿½ï¿½: pvParameters ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ýµï¿½ï¿½Î²ï¿½
+*	ï¿½ï¿½ ï¿½ï¿½ Öµ: ï¿½ï¿½
+*   ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½: 4  
 *
 *********************************************************************************************************/
 static void vTaskCOTL(void *pvParameters)
 {
    
-     uint8_t ucKeyCode=0,abc_s=0,pid_s=0;
-     uint8_t start_s =0,door_s = 0,wiper_s=0,air_s=0;
-     uint8_t hall_s = 0,wheel_s=0,abc_power_s=0;
+     uint8_t ucKeyCode=0,pid_s=0;
+     uint8_t start_s =0;
+   
      
    
      TickType_t xLastWakeTime;
 
-    const TickType_t xFrequency = 200;
+   // const TickType_t xFrequency = 200;
     xLastWakeTime = xTaskGetTickCount();
     BaseType_t xResult;
-	const TickType_t xMaxBlockTime = pdMS_TO_TICKS(1); /* ÉèÖÃ×î´óµÈ´ýÊ±¼äÎª5ms */
+	const TickType_t xMaxBlockTime = pdMS_TO_TICKS(10); /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½Ê±ï¿½ï¿½Îª5ms */
 	uint8_t ucControl=0;
 	uint32_t rlValue,ulValue;
 	
@@ -293,8 +293,8 @@ static void vTaskCOTL(void *pvParameters)
         
 		  xResult = xTaskNotifyWait(0x00000000,      
 						            0xFFFFFFFF,      
-						            &rlValue,        /* ´æ´¢ulNotifiedValueÔÚulvalueÖÐ */
-						            xMaxBlockTime);  /* ×î´óÑÓ³ÙÊ±¼ä */
+						            &rlValue,        /* ï¿½æ´¢ulNotifiedValueï¿½ï¿½ulvalueï¿½ï¿½ */
+						            xMaxBlockTime);  /* ï¿½ï¿½ï¿½ï¿½Ó³ï¿½Ê±ï¿½ï¿½ */
 		
 		if( xResult == pdPASS )
 		{
@@ -313,44 +313,21 @@ static void vTaskCOTL(void *pvParameters)
 			 {
                 ucKeyCode =START_PRES  ; 
 			 }
-			 if(ulValue == 0x07)
-			 {
-                ucKeyCode =DIGITAL_ADD_PRES  ; 
-			 }
-			 if(ulValue == 0x06)
-			 {
-                ucKeyCode =DIGITAL_REDUCE_PRES  ; 
-			 }
-			 if(ulValue == 0x09)
-			 {
-                ucKeyCode =DOOR_PRES ; 
-			 }
-			 if(ulValue == 0x0a)
-			 {
-                ucKeyCode =HALL_PRES ; 
-			 }
 			 if(ulValue == 0x0c)
 			 {
                 ucKeyCode =PID_INPUT_PRES ; //PID 
 			 }
-			  if(ulValue == 0x0e)
-			 {
-                ucKeyCode =WIPERS_PRES ; 
-			 }
-			  if(ulValue == 0x12)
-			 {
-                ucKeyCode =AIR_PRES ; 
-			 }
+		
 			 
 		}
 		else
 		{
-			/* 3?¨º¡À */
+			/* 3?ï¿½ï¿½ï¿½ï¿½ */
 			LED1=0;
 			LED2 =0 ;
 		}
 
-      /*´¦Àí½ÓÊÕµ½µÄ°´¼ü¹¦ÄÜ*/  
+      /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½Ä°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/  
 		if(ucKeyCode !=KEY_UP) 
 				
 			{
@@ -360,7 +337,7 @@ static void vTaskCOTL(void *pvParameters)
                   case DIR_CW_PRES : /*PTE29-DIR_CW_PRES ://Dir =1 ,PTE29-CW,KEY1*/
 
 				  PRINTF("DIR_CW_PRES key \r\n");
-				   Dir =1;
+				   Dir =CCW; //CCW = 1
 				
 				  	break;
 
@@ -371,20 +348,19 @@ static void vTaskCOTL(void *pvParameters)
 		          {
                     
                      ucControl =0xa0;
-                     abc_s =5; 
     				 recoder_number.break_f=0;
-    				 xTaskNotify(xHandleTaskBLDC,           /* Ä¿±êÈÎÎñ--±êÇ©ÃûxHandleTaskBLDC */
-    								ucControl,              /* ·¢ËÍÊý¾Ý */
-    								eSetValueWithOverwrite);/* ÉÏ´ÎÄ¿±êÈÎÎñÃ»ÓÐÖ´ÐÐ£¬»á±»¸²¸Ç */
+    				 xTaskNotify(xHandleTaskBLDC,           /* Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½--ï¿½ï¿½Ç©ï¿½ï¿½xHandleTaskBLDC */
+    								ucControl,              /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    								eSetValueWithOverwrite);/* ï¿½Ï´ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½á±»ï¿½ï¿½ï¿½ï¿½ */
                     printf("START KEY IS SEND WORKS \n");
 				  }
 				  else 
 				  {
                      ucControl = 0xa1;
 					 start_s =0;
-					  xTaskNotify(xHandleTaskBLDC,          /* Ä¿±êÈÎÎñ */
-									ucControl,              /* ·¢ËÍÊý¾Ý */
-									eSetValueWithOverwrite);/* ÉÏ´ÎÄ¿±êÈÎÎñÃ»ÓÐÖ´ÐÐ£¬»á±»¸²¸Ç */
+					  xTaskNotify(xHandleTaskBLDC,          /* Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+									ucControl,              /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+									eSetValueWithOverwrite);/* ï¿½Ï´ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½á±»ï¿½ï¿½ï¿½ï¿½ */
 					 printf("START KEY IS STOP\n");
 				  }
                  
@@ -394,7 +370,7 @@ static void vTaskCOTL(void *pvParameters)
 
 			      recoder_number.dir_change++;
 	  			 PRINTF(" DIR_change = %d  \r\n", recoder_number.dir_change);
-				 Dir =0;
+				 Dir =CW; //CW = -1
 	  			 if(recoder_number.dir_change == 1)
 	   				{
                         LED1 =0;
@@ -414,17 +390,17 @@ static void vTaskCOTL(void *pvParameters)
 				  if(pid_s ==1)
 				  	{
                        ucControl = 0x0d;
-                        xTaskNotify(xHandleTaskUSART,             /* Ä¿±êÈÎÎñ */
-                                   ucControl,              /* ·¢ËÍÊý¾Ý */
-                                   eSetValueWithOverwrite);/* ÉÏ´ÎÄ¿±êÈÎÎñÃ»ÓÐÖ´ÐÐ£¬»á±»¸²¸Ç */
+                        xTaskNotify(xHandleTaskUSART,             /* Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+                                   ucControl,              /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+                                   eSetValueWithOverwrite);/* ï¿½Ï´ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½á±»ï¿½ï¿½ï¿½ï¿½ */
                      }
 					else 
 					{
                      ucControl = 0x00;
                      pid_s =0 ;
-                      xTaskNotify(xHandleTaskUSART,      /* Ä¿±êÈÎÎñ */
-                           ucControl,              /* ·¢ËÍÊý¾Ý */
-                           eSetValueWithOverwrite);/* ÉÏ´ÎÄ¿±êÈÎÎñÃ»ÓÐÖ´ÐÐ£¬»á±»¸²¸Ç */
+                      xTaskNotify(xHandleTaskUSART,      /* Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+                           ucControl,              /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+                           eSetValueWithOverwrite);/* ï¿½Ï´ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½á±»ï¿½ï¿½ï¿½ï¿½ */
 
 					}
 				break;
@@ -437,60 +413,60 @@ static void vTaskCOTL(void *pvParameters)
    }//end whilt(1)
 }
 /********************************************************************************************************
-*	º¯ Êý Ãû: AppTaskCreate
-*	¹¦ÄÜËµÃ÷: ´´½¨Ó¦ÓÃÈÎÎñ
-*	ÐÎ    ²Î£ºÎÞ
-*	·µ »Ø Öµ: ÎÞ
+*	ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½: AppTaskCreate
+*	ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+*	ï¿½ï¿½    ï¿½Î£ï¿½ï¿½ï¿½
+*	ï¿½ï¿½ ï¿½ï¿½ Öµ: ï¿½ï¿½
 *********************************************************************************************************/
 static void AppTaskCreate (void)
 {
-    xTaskCreate( vTaskUSART,   									/* ÈÎÎñº¯Êý  */
-                 "vTaskUserIF",     							/* ÈÎÎñÃû    */
-                 configMINIMAL_STACK_SIZE + 166,               	/* ÈÎÎñÕ»´óÐ¡£¬µ¥Î»word£¬Ò²¾ÍÊÇ4×Ö½Ú */
-                 NULL,              							/* ÈÎÎñ²ÎÊý  */
-                 tskIDLE_PRIORITY+1,                 			/* ÈÎÎñÓÅÏÈ¼¶ ×îµÍ*/
-                 &xHandleTaskUSART );  							/* ÈÎÎñ¾ä±ú  */
+    xTaskCreate( vTaskUSART,   									/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  */
+                 "vTaskUserIF",     							/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½    */
+                 configMINIMAL_STACK_SIZE + 166,               	/* ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Î»wordï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½4ï¿½Ö½ï¿½ */
+                 NULL,              							/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  */
+                 tskIDLE_PRIORITY+1,                 			/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½ ï¿½ï¿½ï¿½*/
+                 &xHandleTaskUSART );  							/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  */
 
-	xTaskCreate( vTaskBLDC,    									/* ÈÎÎñº¯Êý  */
-                 "vTaskBLDC",  									/* ÈÎÎñÃû    */
-                 configMINIMAL_STACK_SIZE + 934,         		/* stack´óÐ¡£¬µ¥Î»word£¬Ò²¾ÍÊÇ4×Ö½Ú */
-                 NULL,        									/* ÈÎÎñ²ÎÊý  */
-                 tskIDLE_PRIORITY+2,           					/* ÈÎÎñÓÅÏÈ¼¶*/
-                 &xHandleTaskBLDC); 							/* ÈÎÎñ¾ä±ú  */
+	xTaskCreate( vTaskBLDC,    									/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  */
+                 "vTaskBLDC",  									/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½    */
+                 configMINIMAL_STACK_SIZE + 934,         		/* stackï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Î»wordï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½4ï¿½Ö½ï¿½ */
+                 NULL,        									/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  */
+                 tskIDLE_PRIORITY+2,           					/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½*/
+                 &xHandleTaskBLDC); 							/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  */
 
-	xTaskCreate( vTaskCOTL,    									/* ÈÎÎñº¯Êý  */
-                 "vTaskCOTL",  									/* ÈÎÎñÃû    */
-                 configMINIMAL_STACK_SIZE + 166,         		/* stack´óÐ¡£¬µ¥Î»word£¬Ò²¾ÍÊÇ4×Ö½Ú */
-                 NULL,        									/* ÈÎÎñ²ÎÊý  */
-                 tskIDLE_PRIORITY+3,           					/* ÈÎÎñÓÅÏÈ¼¶*/
-                 &xHandleTaskCOTL); 							/* ÈÎÎñ¾ä±ú  */
+	xTaskCreate( vTaskCOTL,    									/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  */
+                 "vTaskCOTL",  									/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½    */
+                 configMINIMAL_STACK_SIZE + 166,         		/* stackï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Î»wordï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½4ï¿½Ö½ï¿½ */
+                 NULL,        									/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  */
+                 tskIDLE_PRIORITY+3,           					/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½*/
+                 &xHandleTaskCOTL); 							/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  */
 
 }
 /********************************************************************
  *
- *	º¯ Êý Ãû: AppObjCreate
- *	¹¦ÄÜËµÃ÷: ´´½¨ÈÎÎñÍ¨ÐÅ»úÖÆ
- *	ÐÎ    ²Î: ÎÞ
- *	·µ »Ø Öµ: ÎÞ
+ *	ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½: AppObjCreate
+ *	ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½Å»ï¿½ï¿½ï¿½
+ *	ï¿½ï¿½    ï¿½ï¿½: ï¿½ï¿½
+ *	ï¿½ï¿½ ï¿½ï¿½ Öµ: ï¿½ï¿½
  *
 ********************************************************************/
 #if 0
 static void AppObjCreate (void)
 {
   
-    /* ´´½¨10¸öuint8_tÐÍÏûÏ¢¶ÓÁÐ */
+    /* ï¿½ï¿½ï¿½ï¿½10ï¿½ï¿½uint8_tï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ */
 	xQueue1 = xQueueCreate(10, sizeof(uint8_t));
     if( xQueue1 == 0 )
     {
        printf("xQueuel set up fail!!!!"); 
-       /* Ã»ÓÐ´´½¨³É¹¦£¬ÓÃ»§¿ÉÒÔÔÚÕâÀï¼ÓÈë´´½¨Ê§°ÜµÄ´¦Àí»úÖÆ */
+       /* Ã»ï¿½Ð´ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë´´ï¿½ï¿½Ê§ï¿½ÜµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
     }
     #if 0
-     /* ´´½¨10¸ö´æ´¢Ö¸Õë±äÁ¿µÄÏûÏ¢¶ÓÁÐ£¬ÓÉÓÚCM3/CM4ÄÚºËÊÇ32Î»»ú£¬Ò»¸öÖ¸Õë±äÁ¿Õ¼ÓÃ4¸ö×Ö½Ú */
+     /* ï¿½ï¿½ï¿½ï¿½10ï¿½ï¿½ï¿½æ´¢Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½CM3/CM4ï¿½Úºï¿½ï¿½ï¿½32Î»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½4ï¿½ï¿½ï¿½Ö½ï¿½ */
 	xQueue2 = xQueueCreate(10, sizeof(struct Msg *));
     if( xQueue2 == 0 )
     {
-         printf("xQueue2 set up fail!!!!"); /* Ã»ÓÐ´´½¨³É¹¦£¬ÓÃ»§¿ÉÒÔÔÚÕâÀï¼ÓÈë´´½¨Ê§°ÜµÄ´¦Àí»úÖÆ */
+         printf("xQueue2 set up fail!!!!"); /* Ã»ï¿½Ð´ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë´´ï¿½ï¿½Ê§ï¿½ÜµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
     }
     #endif 
 

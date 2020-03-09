@@ -205,13 +205,13 @@ static void PWM_DRV_Init3PhPwm(void)
     uint16_t deadTimeVal;
     pwm_signal_param_t pwmSignal[2];
     uint32_t pwmSourceClockInHz;
-    uint32_t pwmFrequencyInHz = 1000;//1300; //1.3KHZ
+    uint32_t pwmFrequencyInHz = 1000;//1000;//1300; //1.3KHZ
 
 
     pwmSourceClockInHz = PWM_SRC_CLK_FREQ;
 
     /* Set deadtime count, we set this to about 650ns */
-    deadTimeVal = 650;//((uint64_t)pwmSourceClockInHz * 650) / 1000000000;
+    deadTimeVal =((uint64_t)pwmSourceClockInHz * 650) / 1000000000;
 
     pwmSignal[0].pwmChannel       = kPWM_PwmA;
     pwmSignal[0].level            = kPWM_HighTrue;
@@ -260,7 +260,7 @@ void HALLSensor_Detected_BLDC(void)
   //uwStep = HallSensor_GetPinState();
  // PRINTF("uwStep = %d\n",uwStep);
   // __IO uint32_t tmp = 0; 
- if(Dir == 0)
+ if(Dir == CW)
   {
     uwStep = (uint32_t)7 - uwStep;        // 逆时针 CW = 7 - CCW;
   }
