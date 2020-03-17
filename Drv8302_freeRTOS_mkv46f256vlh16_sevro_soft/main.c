@@ -285,7 +285,7 @@ static void vTaskCOTL(void *pvParameters)
      uint8_t start_s =0;
    
      
-   
+      BaseType_t xHigherPriorityTaskWoken = pdFALSE;
      TickType_t xLastWakeTime;
 
    // const TickType_t xFrequency = 200;
@@ -396,23 +396,14 @@ static void vTaskCOTL(void *pvParameters)
 				
 			 case PID_INPUT_PRES ://4
 				  PRINTF("PID_INPUT_PRES key \r\n");
-				  pid_s++;
-				  if(pid_s ==1)
-				  	{
-                       ucControl = 0x0d;
-                        xTaskNotify(xHandleTaskUSART,             	/* 任务句柄 */
-                                   ucControl,              			/* 更新任务块控制块中的变量            ulNotifiedValue*/
-                                   eSetValueWithOverwrite);			/* 任务通知模式设置 */
-                     }
-					else 
-					{
-                     ucControl = 0x00;
-                     pid_s =0 ;
-                      xTaskNotify(xHandleTaskUSART,      /* 任务句柄 */
-                           ucControl,              		 /* 更新任务块控制块中的变量            ulNotifiedValue*/
-                           eSetValueWithOverwrite);		 /* 任务通知模式设置 */
-
-					}
+				  uint8_t ucControl=0xa1;
+                
+				 xTaskNotifyFromISR( xHandleTaskBLDC,
+                        ucControl,
+                        eSetValueWithOverwrite,
+                        &xHigherPriorityTaskWoken );
+    
+                 portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
 				break;
 				
 			 
@@ -495,29 +486,22 @@ static void AppObjCreate (void)
 #if 1
 void BARKE_KEY_IRQ_HANDLER(void )//void BOARD_BRAKE_IRQ_HANDLER(void)
 {
-     uint8_t ucControl=0xa1;
-     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-    
   
-     /* Clear external interrupt flag. */
+    /* Clear external interrupt flag. */
     GPIO_PortClearInterruptFlags(BRAKE_KEY_GPIO, 1U << BRAKE_KEY_GPIO_PIN );
     /* Change state of button. */
     #ifdef DRV8302
 		GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,0);
 	#endif 
-    xTaskNotifyFromISR( xHandleTaskBLDC,
-                        ucControl,
-                        eSetValueWithOverwrite,
-                        &xHigherPriorityTaskWoken );
-    
-    portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
-	PRINTF("interrupte has happed  \r\n");
+    PMW_AllClose_ABC_Channel();
+    PRINTF("Interrupt Occurs!!!! \r\n");
 	                  
-/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
   exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
-    __DSB();
+	  __DSB();
 #endif
+
 }
 #endif 
 
