@@ -129,7 +129,7 @@ int main(void)
 *	����˵��: �ӿ���Ϣ������
 *	��    ��: pvParameters ���ڴ���������ʱ���ݵ��β�
 *	�� �� ֵ: ��
-*   �� �� ��: 1  (��ֵԽС���ȼ�Խ�ͣ�������ȼ�)
+*   �� �� ��: 1  (��ֵԽС���ȼ�Խ�ͣ�������ȼ�?
 ********************************************************************************************************/
 static void vTaskUSART(void *pvParameters)
 {
@@ -137,8 +137,9 @@ static void vTaskUSART(void *pvParameters)
  // const TickType_t xFrequency = 300;
   uint8_t i,ch,D0,D1,D2,D3,RxBuff[4];
   MSG_T *ptMsg;
- 
-  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(300); /* �������ȴ�ʱ��Ϊ300ms */
+  BaseType_t xResult;
+  TickType_t ucUsartValue;
+  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(500); /* �������ȴ�ʱ��Ϊ300ms */
   /* ��ʼ���ṹ��ָ�� */
 	ptMsg = &g_tMsg;
 	
@@ -149,17 +150,27 @@ static void vTaskUSART(void *pvParameters)
 
   while(1)
     {
-        UART_ReadBlocking(DEMO_UART, RxBuff, 4);
+
+		
+
+		UART_ReadBlocking(DEMO_UART, RxBuff, 4);
+		
       
-        for(i=0;i<4;i++){
+          
+			
+         for(i=0;i<4;i++){
           D0 =RxBuff[0];
 		  D1 =RxBuff[1];
 		  D2 =RxBuff[2];
 		  D3 =RxBuff[3];
 		  PRINTF("D0 D1 D2 D3 =%d %d %d %d  \r\n",D0,D1,D2,D3);
 
-		}
-      
+		
+		 
+		  
+	
+
+								 
         if(D0 == 0x01) //'1' = 0x31
          {
              
@@ -185,10 +196,11 @@ static void vTaskUSART(void *pvParameters)
 							eSetValueWithOverwrite);/* �ϴ�Ŀ������û��ִ�У��ᱻ���� */
 		  		PRINTF("Send to xHanderCONT StartUp \n");
         }
+		
 	    taskYIELD(); //vTaskDelay(xMaxBlockTime);// vTaskDelayUntil(&xLastWakeTime, xFrequency);
     }
+  }
 }
-
 /*********************************************************************************************************
 *	�� �� ��: vTaskBLDC
 *	����˵��: ʹ�ú���xQueueReceive��������vTaskTaskUserIF���͵���Ϣ��������(xQueue2)	
@@ -218,7 +230,7 @@ static void vTaskBLDC(void *pvParameters)
         xResult = xTaskNotifyWait(0x00000000,      
 						          0xFFFFFFFF,      
 						          &ucConValue,        /* �洢ulNotifiedValue��ulvalue�� */
-						          xMaxBlockTime);  /* ����ӳ�ʱ�� */
+						          xMaxBlockTime);  /* ����ӳ�ʱ��?*/
 	  if(xResult == pdPASS)
 		{
 			/* �������ݳɹ� */
@@ -238,6 +250,12 @@ static void vTaskBLDC(void *pvParameters)
 				  GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,1);
 				  uwStep = HallSensor_GetPinState();
 				  HALLSensor_Detected_BLDC(); 
+#if 1
+				  sampleMask++;
+					
+     
+				 
+#endif 
 		}
 		else{
 			// #ifdef DRV8302
@@ -248,7 +266,18 @@ static void vTaskBLDC(void *pvParameters)
 	      DelayMs(50);
 			
 		}
-     
+		if(sampleMask==100){
+
+				    
+                 
+                          xTaskNotify(xHandleTaskCOTL,      
+                           				sampleMask,              
+                           				eSetValueWithOverwrite);
+					     PRINTF("xTask BLDC \r\n");
+
+				  }
+				  if(sampleMask >=100)sampleMask =0;
+		 
 
 	
         taskYIELD();// // vTaskDelayUntil(&xLastWakeTime, xFrequency); // vTaskDelay(xMaxBlockTime);   // taskYIELD();//      
@@ -261,7 +290,7 @@ static void vTaskBLDC(void *pvParameters)
 *	����˵��: �����������������ְ���������
 *	��    ��: pvParameters ���ڴ���������ʱ���ݵ��β�
 *	�� �� ֵ: ��
-*   �� �� ��: 4  
+*   �� �� ��: 
 *
 *********************************************************************************************************/
 static void vTaskCOTL(void *pvParameters)
@@ -294,7 +323,7 @@ static void vTaskCOTL(void *pvParameters)
 		  xResult = xTaskNotifyWait(0x00000000,      
 						            0xFFFFFFFF,      
 						            &rlValue,        /* �洢ulNotifiedValue��ulvalue�� */
-						            xMaxBlockTime);  /* ����ӳ�ʱ�� */
+						            xMaxBlockTime);  /* ����ӳ�ʱ��?*/
 		
 		if( xResult == pdPASS )
 		{
@@ -423,21 +452,21 @@ static void AppTaskCreate (void)
     xTaskCreate( vTaskUSART,   									/* ������  */
                  "vTaskUserIF",     							/* ������    */
                  configMINIMAL_STACK_SIZE + 166,               	/* ����ջ��С����λword��Ҳ����4�ֽ� */
-                 NULL,              							/* �������  */
-                 tskIDLE_PRIORITY+1,                 			/* �������ȼ� ���*/
+                 NULL,              							/* �������? */
+                 tskIDLE_PRIORITY+1,                 			/* �������ȼ� ���? */
                  &xHandleTaskUSART );  							/* ������  */
 
 	xTaskCreate( vTaskBLDC,    									/* ������  */
                  "vTaskBLDC",  									/* ������    */
                  configMINIMAL_STACK_SIZE + 934,         		/* stack��С����λword��Ҳ����4�ֽ� */
-                 NULL,        									/* �������  */
-                 tskIDLE_PRIORITY+2,           					/* �������ȼ�*/
+                 NULL,        									/* �������?      */
+                 tskIDLE_PRIORITY+2,           					/* �������ȼ� */
                  &xHandleTaskBLDC); 							/* ������  */
 
 	xTaskCreate( vTaskCOTL,    									/* ������  */
                  "vTaskCOTL",  									/* ������    */
                  configMINIMAL_STACK_SIZE + 166,         		/* stack��С����λword��Ҳ����4�ֽ� */
-                 NULL,        									/* �������  */
+                 NULL,        									/* �������? */
                  tskIDLE_PRIORITY+3,           					/* �������ȼ�*/
                  &xHandleTaskCOTL); 							/* ������  */
 
@@ -459,14 +488,14 @@ static void AppObjCreate (void)
     if( xQueue1 == 0 )
     {
        printf("xQueuel set up fail!!!!"); 
-       /* û�д����ɹ����û�������������봴��ʧ�ܵĴ������� */
+       /* û�д����ɹ����û�������������봴��ʧ�ܵĴ�������?*/
     }
     #if 0
-     /* ����10���洢ָ���������Ϣ���У�����CM3/CM4�ں���32λ����һ��ָ�����ռ��4���ֽ� */
+     /* ����10���洢ָ���������Ϣ���У�����CM3/CM4�ں���32λ����һ��ָ�����ռ��?���ֽ� */
 	xQueue2 = xQueueCreate(10, sizeof(struct Msg *));
     if( xQueue2 == 0 )
     {
-         printf("xQueue2 set up fail!!!!"); /* û�д����ɹ����û�������������봴��ʧ�ܵĴ������� */
+         printf("xQueue2 set up fail!!!!"); /* û�д����ɹ����û�������������봴��ʧ�ܵĴ�������?*/
     }
     #endif 
 
