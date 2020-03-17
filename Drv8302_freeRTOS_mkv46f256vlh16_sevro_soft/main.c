@@ -486,7 +486,8 @@ static void AppObjCreate (void)
 #if 1
 void BARKE_KEY_IRQ_HANDLER(void )//void BOARD_BRAKE_IRQ_HANDLER(void)
 {
-  
+
+	 uint8_t ucControl =0xff;
     /* Clear external interrupt flag. */
     GPIO_PortClearInterruptFlags(BRAKE_KEY_GPIO, 1U << BRAKE_KEY_GPIO_PIN );
     /* Change state of button. */
@@ -494,6 +495,10 @@ void BARKE_KEY_IRQ_HANDLER(void )//void BOARD_BRAKE_IRQ_HANDLER(void)
 		GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,0);
 	#endif 
     PMW_AllClose_ABC_Channel();
+	
+    xTaskNotify(xHandleTaskBLDC,          
+    			ucControl,              
+    			eSetValueWithOverwrite);
     PRINTF("Interrupt Occurs!!!! \r\n");
 	                  
   /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
