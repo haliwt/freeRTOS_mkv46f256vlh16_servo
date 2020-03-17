@@ -41,6 +41,7 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+#define DRV8302 1
 
 #define MAX_LOG_LENGTH 20
 
@@ -75,7 +76,7 @@ static TaskHandle_t xHandleTaskCOTL = NULL;
 typedef struct Msg
 {
 	uint8_t  ucMessageID;
-	uint8_t  usData[10];
+	uint8_t  usData[4];
 	
 }MSG_T;
 
@@ -135,39 +136,35 @@ static void vTaskUSART(void *pvParameters)
 {
  // TickType_t xLastWakeTime;
  // const TickType_t xFrequency = 300;
-  uint8_t i,ch,D0,D1,D2,D3,RxBuff[4];
+  uint8_t i,D0;
   MSG_T *ptMsg;
   BaseType_t xResult;
   TickType_t ucUsartValue;
-  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(500); /* �������ȴ�ʱ��Ϊ300ms */
+  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(200); /* �ȴ�ʱ��300ms */
   /* ��ʼ���ṹ��ָ�� */
 	ptMsg = &g_tMsg;
 	
 	/* ��ʼ������ */
 	ptMsg->ucMessageID = 0;
     for(i=0;i<4;i++)
-        ch =ptMsg->usData[i];
+        D0 =ptMsg->usData[i]=0;
 
   while(1)
     {
 
-		
-
-		UART_ReadBlocking(DEMO_UART, RxBuff, 4);
-		
+		UART_ReadBlocking(DEMO_UART, ptMsg->usData, 4);
+#if 1
         for(i=0;i<4;i++){
-		          D0 =RxBuff[0];
-				  D1 =RxBuff[1];
-				  D2 =RxBuff[2];
-				  D3 =RxBuff[3];
-				  PRINTF("D0 D1 D2 D3 =%d %d %d %d  \r\n",D0,D1,D2,D3);
+		          D0=ptMsg->usData[i];
+			
+				  printf("ptMsg->usData[i]=%#x  \r\n",ptMsg->usData[i]);
         }
-		
+#endif 		
 		if(D0 == 0x01) //'1' = 0x31
          {
              
 		      xTaskNotify(xHandleTaskCOTL,      /* notify to who's handle of name */
-								D1,              /* send to value  */
+								ptMsg->usData[1],              /* send to value  */
 								eSetValueWithOverwrite);/* send to order "select item" */
               PRINTF("Send to xHanderCONT is OK \n");
                
@@ -175,21 +172,21 @@ static void vTaskUSART(void *pvParameters)
         if(D0== 0x02)
         {
            
-	      xTaskNotify(xHandleTaskSUBJ,      				/* notify to who's name handle  */
+	      xTaskNotify(xHandleTaskCOTL,      				/* notify to who's name handle  */
 							ptMsg->usData[2],              	/* send to value */
 							eSetValueWithOverwrite);		/* set up order "modle item" */
 		  					PRINTF("Send to xHanderCONT DIR CCW \n");
         }
-		if(ptMsg->usData[0]== 0x3)/*����PID ����*/
+		if(D0==03)/*����PID ����*/
         {
            
-	      xTaskNotify(xHandleTaskSUBJ,      /* Ŀ������ */
-							ptMsg->usData[2],              /* �������� */
+	      xTaskNotify(xHandleTaskCOTL,      /* Ŀ������ */
+							ptMsg->usData[3],              /* �������� */
 							eSetValueWithOverwrite);/* �ϴ�Ŀ������û��ִ�У��ᱻ���� */
 		  		PRINTF("Send to xHanderCONT StartUp \n");
         }
 		
-	    taskYIELD(); //vTaskDelay(xMaxBlockTime);// vTaskDelayUntil(&xLastWakeTime, xFrequency);
+	  vTaskDelay(xMaxBlockTime);// vTaskDelayUntil(&xLastWakeTime, xFrequency);
    
   }
 }
@@ -226,7 +223,7 @@ static void vTaskBLDC(void *pvParameters)
 						          xMaxBlockTime);  /* ����ӳ�ʱ��?*/
 	  if(xResult == pdPASS)
 		{
-			/* �������ݳɹ� */
+			/* Receivce data printf  */
           printf("vTaskBLDC  = %#x\r\n",ucConValue );
 		  ucValue = ucConValue ;
 		}
@@ -238,22 +235,19 @@ static void vTaskBLDC(void *pvParameters)
     
 		if(ucValue==0xa0){ 
 			
-				  
 				  PWM_Duty = 50;
-				  GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,1);
+				  #ifdef DRV8302
+				  	GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,1);
+				  #endif 
 				  uwStep = HallSensor_GetPinState();
 				  HALLSensor_Detected_BLDC(); 
-#if 1
+
 				  sampleMask++;
-					
-     
-				 
-#endif 
 		}
 		else{
-			// #ifdef DRV8302
-		 	GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,0);
-		 //   #endif 
+			 #ifdef DRV8302
+		 	  GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,0);
+		    #endif 
 	      DelayMs(50);
 	      GPIO_PortToggle(GPIOD,1<<BOARD_LED1_GPIO_PIN);
 	      DelayMs(50);
@@ -261,15 +255,13 @@ static void vTaskBLDC(void *pvParameters)
 		}
 		if(sampleMask==100){
 
-				    
-                 
-                          xTaskNotify(xHandleTaskCOTL,      
-                           				sampleMask,              
-                           				eSetValueWithOverwrite);
-					     PRINTF("xTask BLDC \r\n");
+				   xTaskNotify(xHandleTaskCOTL,      
+								sampleMask,              
+								eSetValueWithOverwrite);
+					PRINTF("xTask BLDC \r\n");
 
-				  }
-				  if(sampleMask >=100)sampleMask =0;
+		}
+		if(sampleMask >=100)sampleMask =0;
 		 
 
 	
@@ -299,24 +291,20 @@ static void vTaskCOTL(void *pvParameters)
    // const TickType_t xFrequency = 200;
     xLastWakeTime = xTaskGetTickCount();
     BaseType_t xResult;
-	const TickType_t xMaxBlockTime = pdMS_TO_TICKS(10); /* �������ȴ�ʱ��Ϊ5ms */
+	const TickType_t xMaxBlockTime = pdMS_TO_TICKS(10); /* ��������ʱ��10ms */
 	uint8_t ucControl=0;
 	uint32_t rlValue,ulValue;
 	
 
 	while(1)
     {
-	    //  printf("vTaskCOTL-3 \r\n");
-
-          
-          
-		  ucKeyCode = KEY_Scan(0);
+	      ucKeyCode = KEY_Scan(0);
            
         
 		  xResult = xTaskNotifyWait(0x00000000,      
 						            0xFFFFFFFF,      
 						            &rlValue,        /* �洢ulNotifiedValue��ulvalue�� */
-						            xMaxBlockTime);  /* ����ӳ�ʱ��?*/
+						            xMaxBlockTime);  /* ����ʱ�� */
 		
 		if( xResult == pdPASS )
 		{
@@ -349,7 +337,7 @@ static void vTaskCOTL(void *pvParameters)
 			LED2 =0 ;
 		}
 
-      /*�������յ��İ�������*/  
+      /*Key of function */  
 		if(ucKeyCode !=KEY_UP) 
 				
 			{
@@ -374,7 +362,7 @@ static void vTaskCOTL(void *pvParameters)
     				 xTaskNotify(xHandleTaskBLDC,           /* Ŀ������--��ǩ��xHandleTaskBLDC */
     								ucControl,              /* �������� */
     								eSetValueWithOverwrite);/* �ϴ�Ŀ������û��ִ�У��ᱻ���� */
-                    printf("START KEY IS SEND WORKS \n");
+                    PRINTF("START KEY IS SEND WORKS \n");
 				  }
 				  else 
 				  {
@@ -383,7 +371,7 @@ static void vTaskCOTL(void *pvParameters)
 					  xTaskNotify(xHandleTaskBLDC,          /* Ŀ������ */
 									ucControl,              /* �������� */
 									eSetValueWithOverwrite);/* �ϴ�Ŀ������û��ִ�У��ᱻ���� */
-					 printf("START KEY IS STOP\n");
+					 PRINTF("START KEY IS STOP\n");
 				  }
                  
 				  break;
@@ -507,13 +495,22 @@ static void AppObjCreate (void)
 #if 1
 void BARKE_KEY_IRQ_HANDLER(void )//void BOARD_BRAKE_IRQ_HANDLER(void)
 {
+     uint8_t ucControl=0xa1;
+     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    
   
-    /* Clear external interrupt flag. */
+     /* Clear external interrupt flag. */
     GPIO_PortClearInterruptFlags(BRAKE_KEY_GPIO, 1U << BRAKE_KEY_GPIO_PIN );
     /* Change state of button. */
+    #ifdef DRV8302
+		GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,0);
+	#endif 
+    xTaskNotifyFromISR( xHandleTaskBLDC,
+                        ucControl,
+                        eSetValueWithOverwrite,
+                        &xHigherPriorityTaskWoken );
     
-	GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,0);
-	recoder_number.break_f =1;
+    portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
 	PRINTF("interrupte has happed  \r\n");
 	                  
 /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping

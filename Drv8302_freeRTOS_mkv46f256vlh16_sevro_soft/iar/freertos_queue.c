@@ -65,7 +65,7 @@ static QueueHandle_t xQueue2 = NULL;
 typedef struct Msg
 {
 	uint8_t  ucMessageID;
-	uint16_t usData[2];
+	uint16_t usData[4];
 	uint32_t ulData[2];
 }MSG_T;
 
@@ -134,7 +134,7 @@ static void vTaskMsgPro(void *pvParameters)
 	ptMsg->ucMessageID = 0;
 	ptMsg->ulData[0] = 0;
 	ptMsg->usData[0] = 0;
-#if 0
+#if 1
     while(1)
     {
 		//ucKeyCode = bsp_GetKey();
