@@ -219,8 +219,8 @@ static void vTaskBLDC(void *pvParameters)
 
         xResult = xTaskNotifyWait(0x00000000,      
 						          0xFFFFFFFF,      
-						          &ucConValue,        /* ï¿½æ´¢ulNotifiedValueï¿½ï¿½ulvalueï¿½ï¿½ */
-						          xMaxBlockTime);  /* ï¿½ï¿½ï¿½ï¿½Ó³ï¿½Ê±ï¿½ï¿?*/
+						          &ucConValue,        /* send to data  */
+						          xMaxBlockTime);  /* delay max times*/
 	  if(xResult == pdPASS)
 		{
 			/* Receivce data printf  */
@@ -258,7 +258,7 @@ static void vTaskBLDC(void *pvParameters)
 				   xTaskNotify(xHandleTaskCOTL,      
 								sampleMask,              
 								eSetValueWithOverwrite);
-					PRINTF("xTask BLDC \r\n");
+					//PRINTF("xTask BLDC \r\n");
 
 		}
 		if(sampleMask >=100)sampleMask =0;
@@ -291,7 +291,7 @@ static void vTaskCOTL(void *pvParameters)
    // const TickType_t xFrequency = 200;
     xLastWakeTime = xTaskGetTickCount();
     BaseType_t xResult;
-	const TickType_t xMaxBlockTime = pdMS_TO_TICKS(10); /* ÉèÖÃ×èÈûÊ±¼ä10ms */
+	const TickType_t xMaxBlockTime = pdMS_TO_TICKS(100); /* ÉèÖÃ×èÈûÊ±¼ä10ms */
 	uint8_t ucControl=0;
 	uint32_t rlValue,ulValue;
 	
@@ -332,9 +332,11 @@ static void vTaskCOTL(void *pvParameters)
 		}
 		else
 		{
-			/* 3?ï¿½ï¿½ï¿½ï¿½ */
-			LED1=0;
+			
 			LED2 =0 ;
+			DelayMs(100);
+			LED2=1;
+			DelayMs(100);
 		}
 
       /*Key of function */  
@@ -359,18 +361,18 @@ static void vTaskCOTL(void *pvParameters)
                     
                      ucControl =0xa0;
     				 recoder_number.break_f=0;
-    				 xTaskNotify(xHandleTaskBLDC,           /* Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½--ï¿½ï¿½Ç©ï¿½ï¿½xHandleTaskBLDC */
-    								ucControl,              /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
-    								eSetValueWithOverwrite);/* ï¿½Ï´ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½á±»ï¿½ï¿½ï¿½ï¿½ */
+    				 xTaskNotify(xHandleTaskBLDC,           /* Who's name handleTask */
+    								ucControl,              /* ulvalue of value */
+    								eSetValueWithOverwrite);/* xTaskNotify of set up mode */
                     PRINTF("START KEY IS SEND WORKS \n");
 				  }
 				  else 
 				  {
                      ucControl = 0xa1;
 					 start_s =0;
-					  xTaskNotify(xHandleTaskBLDC,          /* Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
-									ucControl,              /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
-									eSetValueWithOverwrite);/* ï¿½Ï´ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½á±»ï¿½ï¿½ï¿½ï¿½ */
+					  xTaskNotify(xHandleTaskBLDC,          /* Who's name hanleTask */
+									ucControl,              /* ulvalue of value */
+									eSetValueWithOverwrite);/* mode set up */
 					 PRINTF("START KEY IS STOP\n");
 				  }
                  
@@ -443,37 +445,7 @@ static void AppTaskCreate (void)
                  &xHandleTaskCOTL); 							/* ÈÎÎñ¾ä±ú      */
 
 }
-/********************************************************************
- *
- *	º¯ÊýÃû: AppObjCreate
- *	º¯Êý¹¦ÄÜ: ´´½¨ÈÎÎñÍ¨ÐÅ»úÖÆ
- *	ÊäÈëÐÎ²Î: ÎÞ
- *	·µ»ØÖµ: ÎÞ
- *
-********************************************************************/
-#if 0
-static void AppObjCreate (void)
-{
-  
-    /* ´´½¨¶ÓÁÐ 1*/
-	xQueue1 = xQueueCreate(10, sizeof(uint8_t));
-    if( xQueue1 == 0 )
-    {
-       printf("xQueuel set up fail!!!!"); 
-       /* ´´½¨¶ÓÁÐÊ§°Ü */
-    } 
-    #if 0
-     /* ´´½¨¶ÓÁÐ2 */
-	xQueue2 = xQueueCreate(10, sizeof(struct Msg *));
-    if( xQueue2 == 0 )
-    {
-         printf("xQueue2 set up fail!!!!"); 
-		 /* ´´½¨¶ÓÁÐÊ§°Ü  */
-    }
-    #endif 
 
-}
-#endif 
 /******************************************************************************
  *
  * Function Name:BARKE_KEY_IRQ_HANDLER(void)
@@ -488,6 +460,7 @@ void BARKE_KEY_IRQ_HANDLER(void )//void BOARD_BRAKE_IRQ_HANDLER(void)
 {
 
 	 uint8_t ucControl =0xff;
+	 BaseType_t xYieldRequired;
     /* Clear external interrupt flag. */
     GPIO_PortClearInterruptFlags(BRAKE_KEY_GPIO, 1U << BRAKE_KEY_GPIO_PIN );
     /* Change state of button. */
@@ -495,11 +468,15 @@ void BARKE_KEY_IRQ_HANDLER(void )//void BOARD_BRAKE_IRQ_HANDLER(void)
 		GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,0);
 	#endif 
     PMW_AllClose_ABC_Channel();
-	
-    xTaskNotify(xHandleTaskBLDC,          
-    			ucControl,              
-    			eSetValueWithOverwrite);
     PRINTF("Interrupt Occurs!!!! \r\n");
+
+    
+  	 xYieldRequired =xTaskResumeFromISR(xHandleTaskBLDC);
+     /* ÍË³öÖÐ¶Ïºó£¬ÊÇ·ñÐèÒªÖ´ÐÐÈÎÎñÇÐ»»*/
+    if(xYieldRequired==pdTRUE)
+		portYIELD_FROM_ISR(xYieldRequired);
+	
+   
 	                  
   /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
   exception return operation might vector to incorrect interrupt */
