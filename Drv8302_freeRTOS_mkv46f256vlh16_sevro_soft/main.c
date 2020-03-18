@@ -210,7 +210,7 @@ static void vTaskBLDC(void *pvParameters)
     volatile uint16_t pwm_f=0;
 	uint16_t sampleMask;
 	BaseType_t xResult;
-    const TickType_t xMaxBlockTime = pdMS_TO_TICKS(1); /* �������ȴ�ʱ��Ϊ300ms */
+    const TickType_t xMaxBlockTime = pdMS_TO_TICKS(1); /* Blocked times 1ms */
 	uint32_t ucConValue;
    
 	
@@ -226,11 +226,6 @@ static void vTaskBLDC(void *pvParameters)
 			/* Receivce data printf  */
           printf("vTaskBLDC  = %#x\r\n",ucConValue );
 		  ucValue = ucConValue ;
-		}
-		else
-		{
-			/* ��ʱ */
-          LED2= !LED2;
 		}
     
 		if(ucValue==0xa0){ 
@@ -328,15 +323,9 @@ static void vTaskCOTL(void *pvParameters)
                 ucKeyCode =PID_INPUT_PRES ; //PID 
 			 }
 		
-			 
 		}
-		else
-		{
-			
-			LED2 =0 ;
-			DelayMs(100);
-			LED2=1;
-			DelayMs(100);
+		else{
+				LED2 = ! LED2;
 		}
 
       /*Key of function */  
