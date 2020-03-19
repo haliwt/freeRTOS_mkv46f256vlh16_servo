@@ -37,7 +37,9 @@
 #include "pollingusart.h"
 #include "output.h"
 #include "input.h"
-//#include "usart_edma_rb.h"
+#include "enc.h"
+#include "ftm.h"
+
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -71,16 +73,18 @@ static TaskHandle_t xHandleTaskCOTL = NULL;
 //static QueueHandle_t xQueue1 = NULL;
 //static QueueHandle_t xQueue2 = NULL;
 
+__IO uint32_t gCurPosValue;
 
 
 typedef struct Msg
 {
 	uint8_t  ucMessageID;
 	uint8_t  usData[4];
+	uint8_t  usInNum;
 	
 }MSG_T;
 
-MSG_T   g_tMsg; /* ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½á¹¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ */
+MSG_T   g_tMsg; /*  */
 
 
 
@@ -96,7 +100,10 @@ int main(void)
 {
     BOARD_InitPins();
     BOARD_BootClockRUN();
+   // ENC_PhaseAB_Init();
+	FTM_PhaseAB_Init();
     BOARD_InitDebugConsole();
+	
     
    
     LED_Init();
@@ -140,7 +147,7 @@ static void vTaskUSART(void *pvParameters)
   MSG_T *ptMsg;
   BaseType_t xResult;
   TickType_t ucUsartValue;
-  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(200); /* µÈ´ýÊ±¼ä300ms */
+  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(200); /* µÈ´ýÊ±¼ä200ms */
   /* ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½á¹¹ï¿½ï¿½Ö¸ï¿½ï¿½ */
 	ptMsg = &g_tMsg;
 	
@@ -230,7 +237,8 @@ static void vTaskBLDC(void *pvParameters)
     
 		if(ucValue==0xa0){ 
 			
-				  PWM_Duty = 50;
+				  PWM_Duty = 50 -g_tMsg.usInNum ;
+				  if(PWM_Duty <=0)PWM_Duty =0;
 				  #ifdef DRV8302
 				  	GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,1);
 				  #endif 
@@ -238,6 +246,8 @@ static void vTaskBLDC(void *pvParameters)
 				  HALLSensor_Detected_BLDC(); 
 
 				  sampleMask++;
+				 // gCurPosValue = ENC_GetPositionValue(DEMO_ENC_BASEADDR);
+				  FTM_GetQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
 		}
 		else{
 			 #ifdef DRV8302
@@ -250,10 +260,14 @@ static void vTaskBLDC(void *pvParameters)
 		}
 		if(sampleMask==100){
 
-				   xTaskNotify(xHandleTaskCOTL,      
+				               xTaskNotify(xHandleTaskCOTL,      
 								sampleMask,              
 								eSetValueWithOverwrite);
-					//PRINTF("xTask BLDC \r\n");
+				//gCurPosValue = ENC_GetPositionValue(DEMO_ENC_BASEADDR);
+		
+			//	printf("Current position value: %ld\r\n", gCurPosValue);
+		    //    printf("Position differential value: %d\r\n", (int16_t)ENC_GetHoldPositionDifferenceValue(DEMO_ENC_BASEADDR));
+		    //    printf("Position revolution value: %d\r\n", ENC_GetHoldRevolutionValue(DEMO_ENC_BASEADDR));
 
 		}
 		if(sampleMask >=100)sampleMask =0;
@@ -278,8 +292,9 @@ static void vTaskCOTL(void *pvParameters)
    
      uint8_t ucKeyCode=0,pid_s=0;
      uint8_t start_s =0;
-   
-     
+     volatile uint32_t encoder_count         = 0U;
+	 volatile bool encoder_direction         = false;
+      uint32_t mCurPosValue;
       BaseType_t xHigherPriorityTaskWoken = pdFALSE;
      TickType_t xLastWakeTime;
 
@@ -287,8 +302,8 @@ static void vTaskCOTL(void *pvParameters)
     xLastWakeTime = xTaskGetTickCount();
     BaseType_t xResult;
 	const TickType_t xMaxBlockTime = pdMS_TO_TICKS(100); /* ÉèÖÃ×èÈûÊ±¼ä10ms */
-	uint8_t ucControl=0;
-	uint32_t rlValue,ulValue;
+	int32_t ucControl=0;
+	int32_t rlValue,ulValue;
 	
 
 	while(1)
@@ -304,26 +319,51 @@ static void vTaskCOTL(void *pvParameters)
 		if( xResult == pdPASS )
 		{
             ulValue=rlValue;
-			printf("vTaskCOTL = %#x\r\n", ulValue);
+			if(ulValue >=0)
+				printf("vTaskCOTL = %#x\r\n", ulValue);
+			else printf("-vTaskCOTL = -%#x\r\n", ulValue);
 			/****************digitalkey coder******************/
-			 if(ulValue == 0x01)
-			 {
-                ucKeyCode =DIR_CW_PRES  ; 
+			
+			 if(ulValue == 0x64){
+					g_tMsg.usInNum ++ ;
+					if(g_tMsg.usInNum == 50)g_tMsg.usInNum =0;
 			 }
-			 if(ulValue == 0x2)
-			 {
-                ucKeyCode =DIR_CCW_PRES  ; 
-			 }
-			 if(ulValue == 0x4)
-			 {
-                ucKeyCode =START_PRES  ; 
-			 }
-			 if(ulValue == 0x0c)
-			 {
-                ucKeyCode =PID_INPUT_PRES ; //PID 
-			 }
+			 /* This read operation would capture all the position counter to responding hold registers. */
+      
+			#if 0
+	        /* Read the position values. */
+	        printf("Current position value: %ld\r\n", gCurPosValue);
+	        printf("Position differential value: %d\r\n", (int16_t)ENC_GetHoldPositionDifferenceValue(DEMO_ENC_BASEADDR));
+	        printf("Position revolution value: %d\r\n", ENC_GetHoldRevolutionValue(DEMO_ENC_BASEADDR));
+			#endif 
+				#if 1
+			      
+			        /* Read counter value */
+			        encoder_count = FTM_GetQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
+			        /* Clear counter */
+			      //  FTM_ClearQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
+			        /* Read direction */
+			        if (FTM_GetQuadDecoderFlags(DEMO_FTM_BASEADDR) & kFTM_QuadDecoderCountingIncreaseFlag)
+			        {
+			            encoder_direction = true;
+			        }
+			        else
+			        {
+			            encoder_direction = false;
+			        }
+			      if (encoder_direction)
+			        {
+			            PRINTF("Encoder direction:+++++++++++\r\n");
+			        }
+			        else
+			        {
+			            PRINTF("Encoder direction:!!!!!!!!!!!! -\r\n");
+			        }
+
+			        PRINTF("Get current counter: %d\r\n", encoder_count);
+					#endif 
+	    }
 		
-		}
 		else{
 				LED2 = ! LED2;
 		}
