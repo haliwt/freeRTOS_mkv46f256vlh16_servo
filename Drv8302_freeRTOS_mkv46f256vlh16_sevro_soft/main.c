@@ -47,6 +47,9 @@
 
 #define MAX_LOG_LENGTH 20
 
+//#define ENC_PHASE 1
+#define FTM_PHASE  2
+
 
 output_t recoder_number;
 
@@ -100,8 +103,10 @@ int main(void)
 {
     BOARD_InitPins();
     BOARD_BootClockRUN();
-   // ENC_PhaseAB_Init();
-	FTM_PhaseAB_Init();
+    #ifdef ENC_PHASE
+    	ENC_PhaseAB_Init();
+    #endif
+   
     BOARD_InitDebugConsole();
 	
     
@@ -120,6 +125,9 @@ int main(void)
     /* Set the PWM Fault inputs to a low value */
     PWM_BLDC_Init();
   //  USART_POLLING_Init();
+     #ifdef FTM_PHASE 
+		FTM_PhaseAB_Init();
+	#endif
      
     /* 创建任务 */
 	AppTaskCreate();
@@ -211,19 +219,21 @@ static void vTaskBLDC(void *pvParameters)
     uint32_t ucValue;
    
 	TickType_t xLastWakeTime;
-	
+	 volatile uint32_t encoder_count         = 0U;
+	 volatile bool encoder_direction         = false;
 	const TickType_t xFrequency = 1;
     xLastWakeTime = xTaskGetTickCount();
     volatile uint16_t pwm_f=0;
 	uint16_t sampleMask;
 	BaseType_t xResult;
-    const TickType_t xMaxBlockTime = pdMS_TO_TICKS(1); /* Blocked times 1ms */
+    const TickType_t xMaxBlockTime = pdMS_TO_TICKS(5); /* Blocked times 1ms */
 	uint32_t ucConValue;
    
 	
 	while(1)
     {       
 
+     
         xResult = xTaskNotifyWait(0x00000000,      
 						          0xFFFFFFFF,      
 						          &ucConValue,        /* send to data  */
@@ -246,8 +256,12 @@ static void vTaskBLDC(void *pvParameters)
 				  HALLSensor_Detected_BLDC(); 
 
 				  sampleMask++;
-				 // gCurPosValue = ENC_GetPositionValue(DEMO_ENC_BASEADDR);
-				  FTM_GetQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
+				  #ifdef ENC_PHASE
+				    gCurPosValue = ENC_GetPositionValue(DEMO_ENC_BASEADDR);
+				  #endif 
+				  #ifdef FTM_PHASE
+				  	//FTM_GetQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
+				  #endif 
 		}
 		else{
 			 #ifdef DRV8302
@@ -261,14 +275,39 @@ static void vTaskBLDC(void *pvParameters)
 		if(sampleMask==100){
 
 				               xTaskNotify(xHandleTaskCOTL,      
-								sampleMask,              
-								eSetValueWithOverwrite);
-				//gCurPosValue = ENC_GetPositionValue(DEMO_ENC_BASEADDR);
-		
-			//	printf("Current position value: %ld\r\n", gCurPosValue);
-		    //    printf("Position differential value: %d\r\n", (int16_t)ENC_GetHoldPositionDifferenceValue(DEMO_ENC_BASEADDR));
-		    //    printf("Position revolution value: %d\r\n", ENC_GetHoldRevolutionValue(DEMO_ENC_BASEADDR));
+											sampleMask,              
+											eSetValueWithOverwrite);
+				#ifdef ENC_PHASE
+					printf("Current position value: %ld\r\n", ENC_GetHoldPositionValue(DEMO_ENC_BASEADDR));
+			        printf("Position differential value: %d\r\n", (int16_t)ENC_GetHoldPositionDifferenceValue(DEMO_ENC_BASEADDR));
+			        printf("Position revolution value: %d\r\n", ENC_GetHoldRevolutionValue(DEMO_ENC_BASEADDR));
+				#endif
 
+			   #ifdef FTM_PHASE
+			         /* Read counter value */
+			        encoder_count = FTM_GetQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
+			        /* Clear counter */
+			      //  FTM_ClearQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
+			        /* Read direction */
+			        if (FTM_GetQuadDecoderFlags(DEMO_FTM_BASEADDR) & kFTM_QuadDecoderCountingIncreaseFlag)
+			        {
+			            encoder_direction = true;
+			        }
+			        else
+			        {
+			            encoder_direction = false;
+			        }
+			      if (encoder_direction)
+			        {
+			            PRINTF("Encoder direction:+++++++++++\r\n");
+			        }
+			        else
+			        {
+			            PRINTF("Encoder direction:!!!!!!!!!!!! -\r\n");
+			        }
+
+			        PRINTF("Get current counter: %d\r\n", encoder_count);
+			    #endif
 		}
 		if(sampleMask >=100)sampleMask =0;
 		 
@@ -308,6 +347,7 @@ static void vTaskCOTL(void *pvParameters)
 
 	while(1)
     {
+	    
 	      ucKeyCode = KEY_Scan(0);
            
         
@@ -361,6 +401,7 @@ static void vTaskCOTL(void *pvParameters)
 			        }
 
 			        PRINTF("Get current counter: %d\r\n", encoder_count);
+			       // FTM_ClearQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
 					#endif 
 	    }
 		

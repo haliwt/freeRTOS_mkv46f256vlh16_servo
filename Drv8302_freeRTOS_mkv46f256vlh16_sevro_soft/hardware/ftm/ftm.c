@@ -1,7 +1,5 @@
 #include "ftm.h"
-#include "fsl_common.h"
-#include "fsl_port.h"
-#include "pin_mux.h"
+
 
 
 static void FTM_BOARD_InitPins(void)
