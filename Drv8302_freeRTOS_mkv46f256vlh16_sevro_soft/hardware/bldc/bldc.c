@@ -12,7 +12,7 @@ __IO uint32_t Lock_Time = 0;  // 堵转电流
 
 __IO int8_t Dir;
 
-
+__IO int32_t HALL_PULSE ; 
 __IO int16_t  PWM_Duty= 60;	 //占空比
 
 
@@ -263,7 +263,9 @@ void HALLSensor_Detected_BLDC(void)
  if(Dir == CW)
   {
     uwStep = (uint32_t)7 - uwStep;        // 逆时针 CW = 7 - CCW;
+    HALL_PULSE --;
   }
+  else HALL_PULSE ++;
  
   
   /*---- six step changed phase */

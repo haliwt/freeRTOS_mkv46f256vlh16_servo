@@ -45,8 +45,8 @@
 #define configUSE_PREEMPTION                    1
 #define configUSE_TICKLESS_IDLE                 0
 #define configCPU_CLOCK_HZ                      (SystemCoreClock)
-#define configTICK_RATE_HZ                      ((TickType_t)1000)//WT.EDIT ((TickType_t)200)  //系统节拍数  0.2Khz，即 5ms
-#define configMAX_PRIORITIES                    4 //WT.EDIT 5
+#define configTICK_RATE_HZ                      ((TickType_t)1000) /* 绯荤粺鑺傛媿 1KHZ = 1ms*/
+#define configMAX_PRIORITIES                    4//WT.EDIT 5
 #define configMINIMAL_STACK_SIZE                ((unsigned short)90)
 #define configMAX_TASK_NAME_LEN                 16
 #define configUSE_16_BIT_TICKS                  0
@@ -118,7 +118,7 @@
 #define INCLUDE_xTimerPendFunctionCall          1
 #define INCLUDE_xTaskAbortDelay                 0
 #define INCLUDE_xTaskGetHandle                  0
-#define INCLUDE_xTaskResumeFromISR              1
+#define INCLUDE_xTaskResumeFromISR              1		/*浠庝腑鏂嚱鏁颁腑鍞ら啋鎵ц浠诲姟鍔熻兘*/
 
  /* Ensure stdint is only used by the compiler, and not the assembler. */
 

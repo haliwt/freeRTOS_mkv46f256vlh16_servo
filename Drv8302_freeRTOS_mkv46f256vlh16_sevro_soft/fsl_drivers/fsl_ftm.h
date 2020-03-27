@@ -919,8 +919,8 @@ static inline uint32_t FTM_GetQuadDecoderFlags(FTM_Type *base)
  */
 static inline void FTM_SetQuadDecoderModuloValue(FTM_Type *base, uint32_t startValue, uint32_t overValue)
 {
-    base->CNTIN = startValue;
-    base->MOD   = overValue;
+    base->CNTIN = startValue;  /* initial counter value  0~65535*/
+    base->MOD   = overValue;   /*counter modulo value*/
 }
 
 /*!
@@ -931,7 +931,7 @@ static inline void FTM_SetQuadDecoderModuloValue(FTM_Type *base, uint32_t startV
  */
 static inline uint32_t FTM_GetQuadDecoderCounterValue(FTM_Type *base)
 {
-    return base->CNT;
+    return base->CNT;/*counter value 0~65535*/
 }
 
 /*!
@@ -943,7 +943,7 @@ static inline uint32_t FTM_GetQuadDecoderCounterValue(FTM_Type *base)
  */
 static inline void FTM_ClearQuadDecoderCounterValue(FTM_Type *base)
 {
-    base->CNT = base->CNTIN;
+    base->CNT = base->CNTIN; /* counter initial value 0~65535*/
 }
 
 /*! @}*/
