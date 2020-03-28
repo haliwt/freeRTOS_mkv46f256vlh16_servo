@@ -376,7 +376,7 @@ static void vTaskCOTL(void *pvParameters)
 		{
             ulValue=rlValue;
 			printf("vTaskCOTL = %#x\r\n", ulValue);
-			else printf("-vTaskCOTL = -%#x\r\n", ulValue);
+			
 			/****************digitalkey coder******************/
 			
 			 if(ulValue == 0x64){
