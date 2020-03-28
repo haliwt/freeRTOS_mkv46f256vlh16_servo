@@ -32,13 +32,13 @@
 #include "fsl_xbara.h"
 #include "led.h"
 #include "key.h"
-#include "bldc.h"
+#include "bsp_bldc.h"
 #include "adc.h"
 #include "pollingusart.h"
 #include "output.h"
 #include "input.h"
-#include "enc.h"
-#include "ftm.h"
+#include "bsp_enc.h"
+#include "bsp_ftm.h"
 
 /*******************************************************************************
  * Definitions
@@ -358,7 +358,7 @@ static void vTaskCOTL(void *pvParameters)
     BaseType_t xResult;
 	const TickType_t xMaxBlockTime = pdMS_TO_TICKS(200); /* ��������ʱ��10ms */
 	int32_t ucControl=0;
-	int32_t rlValue,ulValue;
+	uint32_t rlValue,ulValue;
 	
 
 	while(1)
@@ -375,8 +375,7 @@ static void vTaskCOTL(void *pvParameters)
 		if( xResult == pdPASS )
 		{
             ulValue=rlValue;
-			if(ulValue >=0)
-				printf("vTaskCOTL = %#x\r\n", ulValue);
+			printf("vTaskCOTL = %#x\r\n", ulValue);
 			else printf("-vTaskCOTL = -%#x\r\n", ulValue);
 			/****************digitalkey coder******************/
 			
