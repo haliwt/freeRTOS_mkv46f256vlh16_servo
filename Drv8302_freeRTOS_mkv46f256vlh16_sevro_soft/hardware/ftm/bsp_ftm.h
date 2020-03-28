@@ -17,7 +17,7 @@
 /* Get source clock for FTM driver */
 #define FTM_SOURCE_CLOCK CLOCK_GetFreq(kCLOCK_BusClk)
 
-#define DEMO_QUAD_DECODER_MODULO 65535U
+#define DEMO_QUAD_DECODER_MODULO 1023U
 
 /*******************************************************************************
  * Prototypes

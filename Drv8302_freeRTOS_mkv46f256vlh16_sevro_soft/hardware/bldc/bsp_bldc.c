@@ -186,7 +186,7 @@ void PWM_BLDC_Init(void)
     /* Start the PWM generation from Submodules 0, 1 and 2 */
     PWM_StartTimer(BOARD_PWM_BASEADDR, kPWM_Control_Module_0 | kPWM_Control_Module_1 | kPWM_Control_Module_2);
     
-    PRINTF("PWMA init end \r\n");
+    PRINTF("PWMA init OK ! \r\n");
 }
 /**************************************************************
  *

@@ -16,6 +16,12 @@ static void FTM_BOARD_InitPins(void)
 
     
 }
+/*************************************
+	*
+	*Function Name: FTM_PhaseAB_Init(void)
+	*Function:initinal FTM as phaseA and phase B 
+	*
+**************************************/
 void FTM_PhaseAB_Init(void)
 {
    

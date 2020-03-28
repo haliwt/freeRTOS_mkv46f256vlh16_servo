@@ -47,8 +47,8 @@
 
 #define MAX_LOG_LENGTH 20
 
-#define ENC_PHASE 1
-//#define FTM_PHASE  2
+//#define ENC_PHASE 1
+#define FTM_PHASE  2
 
 
 output_t recoder_number;
@@ -87,12 +87,7 @@ typedef struct Msg
 	uint8_t  usInNum;
 	
 }MSG_T;
-
 MSG_T   g_tMsg; /*  */
-
-
-
-
 /*******************************************************************************
  *
  * Code
@@ -111,14 +106,14 @@ int main(void)
    
     BOARD_InitDebugConsole();
 	
-    
+     #ifdef FTM_PHASE 
+		FTM_PhaseAB_Init();
+	#endif
    
     LED_Init();
     KEY_Init();
     DelayInit();
     HALL_Init();
-    
-  //  SD315AI_SO12_Input_Init();
     
     HallSensor_GetPinState();
     OUTPUT_Fucntion_Init();
@@ -127,9 +122,7 @@ int main(void)
     /* Set the PWM Fault inputs to a low value */
     PWM_BLDC_Init();
   //  USART_POLLING_Init();
-     #ifdef FTM_PHASE 
-		FTM_PhaseAB_Init();
-	#endif
+   
    
     /* �������� */
 	AppTaskCreate();
@@ -209,7 +202,7 @@ static void vTaskUSART(void *pvParameters)
 }
 /*********************************************************************************************************
 *	������: vTaskBLDC
-*	��������: BLDC������к���
+*	��������: BLDC������к���?
 *	�β�: pvParameters �����ú���ʱ���β�
 *	����ֵ: ��
 *   ���ȼ�: 2 (��ֵԽС�����ȼ�Խ��)
@@ -219,13 +212,12 @@ static void vTaskBLDC(void *pvParameters)
 {
     
     uint32_t ucValue;
-   
+   // uint8_t tValue ; /*t = tempoprary */
 	TickType_t xLastWakeTime;
 	 volatile uint32_t encoder_count         = 0U;
 	 volatile bool encoder_direction         = false;
 	const TickType_t xFrequency = 1;
     xLastWakeTime = xTaskGetTickCount();
-    volatile uint16_t pwm_f=0;
 	uint16_t sampleMask,mCurRevValue;
 	BaseType_t xResult;
     const TickType_t xMaxBlockTime = pdMS_TO_TICKS(5); /* Blocked times 1ms */
@@ -234,9 +226,7 @@ static void vTaskBLDC(void *pvParameters)
 	
 	while(1)
     {       
-
-     
-        xResult = xTaskNotifyWait(0x00000000,      
+      xResult = xTaskNotifyWait(0x00000000,      
 						          0xFFFFFFFF,      
 						          &ucConValue,        /* send to data  */
 						          xMaxBlockTime);  /* delay max times*/
@@ -247,10 +237,10 @@ static void vTaskBLDC(void *pvParameters)
 		  ucValue = ucConValue ;
 		}
     
-		if(ucValue==0xa0){ 
+	   if(ucValue==0xa0){ 
 
 			
-				  PWM_Duty = 50 -g_tMsg.usInNum ;
+				  PWM_Duty = 50 - g_tMsg.usInNum ;
 				  if(PWM_Duty <=0)PWM_Duty =0;
 				  #ifdef DRV8302
 				  	GPIO_PinWrite(DRV8302_EN_GATE_GPIO,DRV8302_EN_GATE_GPIO_PIN,1);
@@ -258,19 +248,22 @@ static void vTaskBLDC(void *pvParameters)
 				  uwStep = HallSensor_GetPinState();
 				  HALLSensor_Detected_BLDC(); 
 
-				  mCurPosValue = ENC_GetPositionValue(DEMO_ENC_BASEADDR);
+				  #ifdef ENC_PHASE
+				  	mCurPosValue = ENC_GetPositionValue(DEMO_ENC_BASEADDR);
 	            
-                 ENC_GetPositionDifferenceValue(DEMO_ENC_BASEADDR);
+                 	ENC_GetPositionDifferenceValue(DEMO_ENC_BASEADDR);
 
-				//  mCurRevValue = ENC_GetRevolutionValue(DEMO_ENC_BASEADDR);
-				 // if(mCurRevValue>=65536)
-				  //   DEMO_ENC_BASEADDR->REV = 0X00;
+					//mCurRevValue = ENC_GetRevolutionValue(DEMO_ENC_BASEADDR);
+				 	// if(mCurRevValue>=65536)
+				  	//DEMO_ENC_BASEADDR->REV = 0X00;
+				  #endif 
+				  PRINTF("run mask \r\n");
 				  sampleMask++;
 				  #ifdef ENC_PHASE
 				    gCurPosValue = ENC_GetPositionValue(DEMO_ENC_BASEADDR);
 				  #endif 
 				  #ifdef FTM_PHASE
-				  	//FTM_GetQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
+				  	FTM_GetQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
 				  #endif 
 		}
 		else{
@@ -300,7 +293,7 @@ static void vTaskBLDC(void *pvParameters)
 					
 					PRINTF("Position revolution value: %d\r\n", ENC_GetHoldRevolutionValue(DEMO_ENC_BASEADDR));
 					/* Clear counter */
-			      //  FTM_ClearQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
+			        FTM_ClearQuadDecoderCounterValue(DEMO_FTM_BASEADDR);
 			        /* Read direction */
 			        if (FTM_GetQuadDecoderFlags(DEMO_FTM_BASEADDR) & kFTM_QuadDecoderCountingIncreaseFlag)
 			        {
@@ -329,7 +322,7 @@ static void vTaskBLDC(void *pvParameters)
 		 
 
 	
-        taskYIELD();// // vTaskDelayUntil(&xLastWakeTime, xFrequency); // vTaskDelay(xMaxBlockTime);   // taskYIELD();//      
+        taskYIELD(); // vTaskDelayUntil(&xLastWakeTime, xFrequency); // vTaskDelay(xMaxBlockTime);   // taskYIELD();//      
       }
  } 
 
@@ -384,6 +377,8 @@ static void vTaskCOTL(void *pvParameters)
 					if(g_tMsg.usInNum == 50)g_tMsg.usInNum =0;
 					HALL_PULSE = abs(HALL_PULSE);
 					if(HALL_PULSE >= 65535) HALL_PULSE =0;
+
+					
 			 }
 			 /* This read operation would capture all the position counter to responding hold registers. */
       
@@ -465,19 +460,10 @@ static void vTaskCOTL(void *pvParameters)
 				  
 				 case DIR_CCW_PRES: //Dir = 0;PTE24 =CCW KEY3
 
-			      recoder_number.dir_change++;
+			   
 	  			 PRINTF(" DIR_change = %d  \r\n", recoder_number.dir_change);
 				 Dir =CW; //CW = -1
-	  			 if(recoder_number.dir_change == 1)
-	   				{
-                        LED1 =0;
-						LED2 =0;
-				    }
-				 else 
-				   {
-                      recoder_number.dir_change =0;
-					  
-				   }
+	  			
 			
            		break;
 				
@@ -497,7 +483,7 @@ static void vTaskCOTL(void *pvParameters)
 			}
         
 	}
-    taskYIELD();// vTaskDelayUntil(&xLastWakeTime, xFrequency);//taskYIELD();// vTaskDelayUntil(&xLastWakeTime, xFrequency);//taskYIELD();//
+    taskYIELD();//vTaskDelayUntil(&xLastWakeTime, xFrequency);//taskYIELD();// vTaskDelayUntil(&xLastWakeTime, xFrequency);//taskYIELD();//
    }//end whilt(1)
 }
 /********************************************************************************************************
@@ -511,21 +497,21 @@ static void AppTaskCreate (void)
     xTaskCreate( vTaskUSART,   									/* ������     */
                  "vTaskUserIF",     							/* ������    */
                  configMINIMAL_STACK_SIZE + 166,               	/* ����ջ��С����λword��4���ֽ� */
-                 NULL,              							/* ������� */
+                 NULL,              							/* �������?*/
                  tskIDLE_PRIORITY+1,                 			/* �������ȼ� */
                  &xHandleTaskUSART );  							/* ������     */
 
 	xTaskCreate( vTaskBLDC,    									/* ������ */
                  "vTaskBLDC",  									/* ������    */
                  configMINIMAL_STACK_SIZE + 934,         		/* ����ջ��С����λword��4���ֽ� */
-                 NULL,        									/* �������      */
+                 NULL,        									/* �������?     */
                  tskIDLE_PRIORITY+2,           					/* �������ȼ� */
                  &xHandleTaskBLDC); 							/* ������ */
 
 	xTaskCreate( vTaskCOTL,    									/* ������  */
                  "vTaskCOTL",  									/* ������    */
                  configMINIMAL_STACK_SIZE + 166,         		/* ����ջ��С����λword��4���ֽ� */
-                 NULL,        									/* ������� */
+                 NULL,        									/* �������?*/
                  tskIDLE_PRIORITY+3,           					/* �������ȼ� */
                  &xHandleTaskCOTL); 							/* ������      */
 
